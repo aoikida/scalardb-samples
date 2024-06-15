@@ -8,6 +8,11 @@
 
 This tutorial describes how to create a sample application that supports the multi-storage transactions feature in ScalarDB.
 
+## メモ
+
+schema.jsonでスキーマが定義されている。この内容を変更して、分散SNS用のデータベースを作成する。
+コマンドに関しては、src/main/java/sample以下のSample.javaにて実装が、/command以下のファイルにてインターフェースが記載されている。
+
 ## Overview
 
 The sample e-commerce application shows how users can order and pay for items by using a line of credit. The use case described in this tutorial is the same as the basic [ScalarDB sample](../scalardb-sample/README.md) but takes advantage of the [multi-storage transactions](https://github.com/scalar-labs/scalardb/blob/master/docs/multi-storage-transactions.md) feature in ScalarDB.
@@ -102,20 +107,39 @@ Then, run the following command, replacing `<VERSION>` with the version of the S
 $ java -jar scalardb-schema-loader-<VERSION>.jar --config database.properties --schema-file schema.json --coordinator
 ```
 
-#### Schema details
+#### Schema details for distributed SNS
 
-As shown in [`schema.json`](schema.json) for the sample application, all the tables are created in the `customer` and `order` namespaces.
+As shown in [`schema_sns.json`](schema_sns.json) for the sample application, all the tables are created in the `user` and `post` namespaces.
 
-- `customer.customers`: a table that manages customers' information
-  - `credit_limit`: the maximum amount of money a lender will allow each customer to spend when using a line of credit
-  - `credit_total`: the amount of money that each customer has already spent by using their line of credit
-- `order.orders`: a table that manages order information
-- `order.statements`: a table that manages order statement information
-- `order.items`: a table that manages information of items to be ordered
+- `user.users`: a table that manages users' information
+  - `user_id`: primary key
+  - `name`
+  - `password`
+- `post.posts`: a table that manages post information
+  - `post_id`: primary key
+  - `user_id`: foreign key
+  - `content`
+  - `timestamp`
 
 The Entity Relationship Diagram for the schema is as follows:
 
-![ERD](images/ERD.png)
+![ERD](images/ERD_EZ.png)
+
+## コマンド
+
+### ログイン
+
+ユーザのレコードをCreate
+
+### ポスト (write)
+
+ポストのレコードをCreate
+
+### ポストを見る (Scan)
+
+ポストのレコードをread
+
+
 
 ### Load the initial data
 
