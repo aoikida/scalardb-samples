@@ -109,7 +109,7 @@ $ java -jar scalardb-schema-loader-<VERSION>.jar --config database.properties --
 
 #### Schema details for distributed SNS
 
-As shown in [`schema_sns.json`](schema.json) for the sample application, all the tables are created in the `user` and `post` namespaces.
+As shown in [`schema.json`](schema.json) for the sample application, all the tables are created in the `user` and `post` namespaces.
 
 - `user.users`: a table that manages users' information
   - `user_id`: primary key
@@ -165,7 +165,7 @@ $ ./gradlew run --args="CreateNewUserAccount <arg>"
 $ ./gradlew run --args="GetUser <arg>"
 ```
 
-### 投稿する (write)
+### 投稿する
 
 ポストのレコードをCreate
 
@@ -173,7 +173,7 @@ $ ./gradlew run --args="GetUser <arg>"
 $ ./gradlew run --args="CreateNewPost <arg>"
 ```
 
-### 投稿を見る (read)
+### 投稿を見る
 
 過去のポストのレコードをread
 
