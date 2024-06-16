@@ -122,6 +122,34 @@ public class Sample implements AutoCloseable {
       }
   }
 
+  //ユーザー情報の読み込み
+  public String getUser(int userId) throws TransactionException {
+    DistributedTransaction transaction = null;
+    try {
+      transaction = manager.start();
+      Optional<Result> user =
+          transaction.get(
+              Get.newBuilder()
+                  .namespace("user")
+                  .table("users")
+                  .partitionKey(Key.ofInt("user_id", userId))
+                  .build());
+
+      if (!user.isPresent()) {
+        throw new RuntimeException("User not found");
+      }
+      transaction.commit();
+      return String.format(
+          "{User ID: %d, Name: %s, Password: %s}",
+          userId, user.get().getText("name"), user.get().getText("password"));
+    } catch (TransactionException e) {
+      if (transaction != null) {
+        transaction.abort();
+      }
+      throw e;
+    }
+  }
+
   //投稿
   public void createNewPost(
       int postId,
@@ -177,6 +205,8 @@ public class Sample implements AutoCloseable {
       throw e;
     }
   }
+
+
 
   @Override
   public void close() {

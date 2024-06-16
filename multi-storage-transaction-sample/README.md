@@ -154,15 +154,15 @@ $ ./gradlew run --args="LoadInitialData"
 ユーザのレコードをCreate
 
 ```console
-$ ./gradlew run --args="LoadInitialData"
+$ ./gradlew run --args="CreateNewUserAccount <arg>"
 ```
 
-### ログイン
+### ユーザ情報を取得する (for login)
 
-ログインすると、投稿したり、見たりできるようになる
+ユーザのレコードをread
 
 ```console
-$ ./gradlew run --args="CreateNewUserAccount <arg>"
+$ ./gradlew run --args="GetUser <arg>"
 ```
 
 ### 投稿する (write)
