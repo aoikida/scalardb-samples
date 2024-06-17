@@ -173,7 +173,7 @@ $ ./gradlew run --args="CreateNewPost <arg>"
 過去のポストのレコードをread
 
 ```console
-$ ./gradlew run --args="Get Post <arg>"
+$ ./gradlew run --args="GetPost <arg>"
 ```
 
 ## Stop the sample application
