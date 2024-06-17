@@ -152,6 +152,8 @@ $ ./gradlew run --args="LoadInitialData"
 $ ./gradlew run --args="CreateNewUserAccount <arg>"
 ```
 
+<arg>には、user_id name password
+
 ### ユーザ情報を取得する (for login)
 
 ユーザのレコードをread
@@ -160,6 +162,8 @@ $ ./gradlew run --args="CreateNewUserAccount <arg>"
 $ ./gradlew run --args="GetUser <arg>"
 ```
 
+<arg>にはuser_id
+
 ### 投稿する
 
 ポストのレコードをCreate
@@ -167,6 +171,7 @@ $ ./gradlew run --args="GetUser <arg>"
 ```console
 $ ./gradlew run --args="CreateNewPost <arg>"
 ```
+<arg>には、post_id user_id content timestamp
 
 ### 投稿を見る
 
@@ -175,6 +180,8 @@ $ ./gradlew run --args="CreateNewPost <arg>"
 ```console
 $ ./gradlew run --args="GetPost <arg>"
 ```
+
+<arg>にはpost_id
 
 ## Stop the sample application
 
