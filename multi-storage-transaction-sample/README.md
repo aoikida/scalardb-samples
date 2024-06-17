@@ -8,11 +8,6 @@
 
 This tutorial describes how to create a sample application that supports the multi-storage transactions feature in ScalarDB.
 
-## メモ
-
-schema.jsonでスキーマが定義されている。この内容を変更して、分散SNS用のデータベースを作成する。
-コマンドに関しては、src/main/java/sample以下のSample.javaにて実装が、/command以下のファイルにてインターフェースが記載されている。
-
 ## Overview
 
 The sample e-commerce application shows how users can order and pay for items by using a line of credit. The use case described in this tutorial is the same as the basic [ScalarDB sample](../scalardb-sample/README.md) but takes advantage of the [multi-storage transactions](https://github.com/scalar-labs/scalardb/blob/master/docs/multi-storage-transactions.md) feature in ScalarDB.
