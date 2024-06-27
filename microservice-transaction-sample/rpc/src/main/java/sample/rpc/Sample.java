@@ -15,70 +15,50 @@ public final class Sample {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_rpc_ItemOrder_descriptor;
+    internal_static_rpc_CreateUserOnCassandraRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_rpc_ItemOrder_fieldAccessorTable;
+      internal_static_rpc_CreateUserOnCassandraRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_rpc_PlaceOrderRequest_descriptor;
+    internal_static_rpc_CreateUserOnCassandraResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_rpc_PlaceOrderRequest_fieldAccessorTable;
+      internal_static_rpc_CreateUserOnCassandraResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_rpc_PlaceOrderResponse_descriptor;
+    internal_static_rpc_GetUserRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_rpc_PlaceOrderResponse_fieldAccessorTable;
+      internal_static_rpc_GetUserRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_rpc_Order_descriptor;
+    internal_static_rpc_GetUserResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_rpc_Order_fieldAccessorTable;
+      internal_static_rpc_GetUserResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_rpc_Statement_descriptor;
+    internal_static_rpc_CreatePostRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_rpc_Statement_fieldAccessorTable;
+      internal_static_rpc_CreatePostRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_rpc_GetOrderRequest_descriptor;
+    internal_static_rpc_CreatePostResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_rpc_GetOrderRequest_fieldAccessorTable;
+      internal_static_rpc_CreatePostResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_rpc_GetOrderResponse_descriptor;
+    internal_static_rpc_GetPostRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_rpc_GetOrderResponse_fieldAccessorTable;
+      internal_static_rpc_GetPostRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_rpc_GetOrdersRequest_descriptor;
+    internal_static_rpc_GetPostResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_rpc_GetOrdersRequest_fieldAccessorTable;
+      internal_static_rpc_GetPostResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_rpc_GetOrdersResponse_descriptor;
+    internal_static_rpc_CreateUserOnMysqlRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_rpc_GetOrdersResponse_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_rpc_GetCustomerInfoRequest_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_rpc_GetCustomerInfoRequest_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_rpc_GetCustomerInfoResponse_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_rpc_GetCustomerInfoResponse_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_rpc_PaymentRequest_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_rpc_PaymentRequest_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_rpc_RepaymentRequest_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_rpc_RepaymentRequest_fieldAccessorTable;
+      internal_static_rpc_CreateUserOnMysqlRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_rpc_PrepareRequest_descriptor;
   static final 
@@ -109,155 +89,124 @@ public final class Sample {
   static {
     java.lang.String[] descriptorData = {
       "\n\014sample.proto\022\003rpc\032\033google/protobuf/emp" +
-      "ty.proto\"+\n\tItemOrder\022\017\n\007item_id\030\001 \001(\005\022\r" +
-      "\n\005count\030\002 \001(\005\"L\n\021PlaceOrderRequest\022\023\n\013cu" +
-      "stomer_id\030\001 \001(\005\022\"\n\nitem_order\030\002 \003(\0132\016.rp" +
-      "c.ItemOrder\"&\n\022PlaceOrderResponse\022\020\n\010ord" +
-      "er_id\030\001 \001(\t\"\212\001\n\005Order\022\020\n\010order_id\030\001 \001(\t\022" +
-      "\021\n\ttimestamp\030\002 \001(\003\022\023\n\013customer_id\030\003 \001(\005\022" +
-      "\025\n\rcustomer_name\030\004 \001(\t\022!\n\tstatement\030\005 \003(" +
-      "\0132\016.rpc.Statement\022\r\n\005total\030\006 \001(\005\"\\\n\tStat" +
-      "ement\022\017\n\007item_id\030\001 \001(\005\022\021\n\titem_name\030\002 \001(" +
-      "\t\022\r\n\005price\030\003 \001(\005\022\r\n\005count\030\004 \001(\005\022\r\n\005total" +
-      "\030\005 \001(\005\"#\n\017GetOrderRequest\022\020\n\010order_id\030\001 " +
-      "\001(\t\"-\n\020GetOrderResponse\022\031\n\005order\030\001 \001(\0132\n" +
-      ".rpc.Order\"\'\n\020GetOrdersRequest\022\023\n\013custom" +
-      "er_id\030\001 \001(\005\".\n\021GetOrdersResponse\022\031\n\005orde" +
-      "r\030\001 \003(\0132\n.rpc.Order\"]\n\026GetCustomerInfoRe" +
-      "quest\022\033\n\016transaction_id\030\001 \001(\tH\000\210\001\001\022\023\n\013cu" +
-      "stomer_id\030\002 \001(\005B\021\n\017_transaction_id\"_\n\027Ge" +
-      "tCustomerInfoResponse\022\n\n\002id\030\001 \001(\005\022\014\n\004nam" +
-      "e\030\002 \001(\t\022\024\n\014credit_limit\030\003 \001(\005\022\024\n\014credit_" +
-      "total\030\004 \001(\005\"M\n\016PaymentRequest\022\026\n\016transac" +
-      "tion_id\030\001 \001(\t\022\023\n\013customer_id\030\002 \001(\005\022\016\n\006am" +
-      "ount\030\003 \001(\005\"7\n\020RepaymentRequest\022\023\n\013custom" +
-      "er_id\030\001 \001(\005\022\016\n\006amount\030\002 \001(\005\"(\n\016PrepareRe" +
-      "quest\022\026\n\016transaction_id\030\001 \001(\t\")\n\017Validat" +
-      "eRequest\022\026\n\016transaction_id\030\001 \001(\t\"\'\n\rComm" +
-      "itRequest\022\026\n\016transaction_id\030\001 \001(\t\")\n\017Rol" +
-      "lbackRequest\022\026\n\016transaction_id\030\001 \001(\t2\310\001\n" +
-      "\014OrderService\022?\n\nPlaceOrder\022\026.rpc.PlaceO" +
-      "rderRequest\032\027.rpc.PlaceOrderResponse\"\000\0229" +
-      "\n\010GetOrder\022\024.rpc.GetOrderRequest\032\025.rpc.G" +
-      "etOrderResponse\"\000\022<\n\tGetOrders\022\025.rpc.Get" +
-      "OrdersRequest\032\026.rpc.GetOrdersResponse\"\0002" +
-      "\303\003\n\017CustomerService\022N\n\017GetCustomerInfo\022\033" +
-      ".rpc.GetCustomerInfoRequest\032\034.rpc.GetCus" +
-      "tomerInfoResponse\"\000\022<\n\tRepayment\022\025.rpc.R" +
-      "epaymentRequest\032\026.google.protobuf.Empty\"" +
-      "\000\0228\n\007Payment\022\023.rpc.PaymentRequest\032\026.goog" +
-      "le.protobuf.Empty\"\000\0228\n\007Prepare\022\023.rpc.Pre" +
-      "pareRequest\032\026.google.protobuf.Empty\"\000\022:\n" +
-      "\010Validate\022\024.rpc.ValidateRequest\032\026.google" +
-      ".protobuf.Empty\"\000\0226\n\006Commit\022\022.rpc.Commit" +
-      "Request\032\026.google.protobuf.Empty\"\000\022:\n\010Rol" +
-      "lback\022\024.rpc.RollbackRequest\032\026.google.pro" +
-      "tobuf.Empty\"\000B\026\n\nsample.rpcB\006SampleP\001b\006p" +
-      "roto3"
+      "ty.proto\"O\n\034CreateUserOnCassandraRequest" +
+      "\022\017\n\007user_id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\020\n\010passw" +
+      "ord\030\003 \001(\t\"\037\n\035CreateUserOnCassandraRespon" +
+      "se\"!\n\016GetUserRequest\022\017\n\007user_id\030\001 \001(\005\"B\n" +
+      "\017GetUserResponse\022\017\n\007user_id\030\001 \001(\005\022\014\n\004nam" +
+      "e\030\002 \001(\t\022\020\n\010password\030\003 \001(\t\"F\n\021CreatePostR" +
+      "equest\022\017\n\007post_id\030\001 \001(\005\022\017\n\007user_id\030\002 \001(\005" +
+      "\022\017\n\007content\030\003 \001(\t\"\024\n\022CreatePostResponse\"" +
+      "!\n\016GetPostRequest\022\017\n\007post_id\030\001 \001(\005\"D\n\017Ge" +
+      "tPostResponse\022\017\n\007post_id\030\001 \001(\005\022\017\n\007user_i" +
+      "d\030\002 \001(\005\022\017\n\007content\030\003 \001(\t\"c\n\030CreateUserOn" +
+      "MysqlRequest\022\017\n\007user_id\030\001 \001(\005\022\014\n\004name\030\002 " +
+      "\001(\t\022\020\n\010password\030\003 \001(\t\022\026\n\016transaction_id\030" +
+      "\004 \001(\t\"(\n\016PrepareRequest\022\026\n\016transaction_i" +
+      "d\030\001 \001(\t\")\n\017ValidateRequest\022\026\n\016transactio" +
+      "n_id\030\001 \001(\t\"\'\n\rCommitRequest\022\026\n\016transacti" +
+      "on_id\030\001 \001(\t\")\n\017RollbackRequest\022\026\n\016transa" +
+      "ction_id\030\001 \001(\t2\236\002\n\tCassandra\022`\n\025CreateUs" +
+      "erOnCassandra\022!.rpc.CreateUserOnCassandr" +
+      "aRequest\032\".rpc.CreateUserOnCassandraResp" +
+      "onse\"\000\0226\n\007GetUser\022\023.rpc.GetUserRequest\032\024" +
+      ".rpc.GetUserResponse\"\000\022?\n\nCreatePost\022\026.r" +
+      "pc.CreatePostRequest\032\027.rpc.CreatePostRes" +
+      "ponse\"\000\0226\n\007GetPost\022\023.rpc.GetPostRequest\032" +
+      "\024.rpc.GetPostResponse\"\0002\360\003\n\005Mysql\0226\n\007Get" +
+      "User\022\023.rpc.GetUserRequest\032\024.rpc.GetUserR" +
+      "esponse\"\000\022?\n\nCreatePost\022\026.rpc.CreatePost" +
+      "Request\032\027.rpc.CreatePostResponse\"\000\0226\n\007Ge" +
+      "tPost\022\023.rpc.GetPostRequest\032\024.rpc.GetPost" +
+      "Response\"\000\022L\n\021CreateUserOnMysql\022\035.rpc.Cr" +
+      "eateUserOnMysqlRequest\032\026.google.protobuf" +
+      ".Empty\"\000\0228\n\007Prepare\022\023.rpc.PrepareRequest" +
+      "\032\026.google.protobuf.Empty\"\000\022:\n\010Validate\022\024" +
+      ".rpc.ValidateRequest\032\026.google.protobuf.E" +
+      "mpty\"\000\0226\n\006Commit\022\022.rpc.CommitRequest\032\026.g" +
+      "oogle.protobuf.Empty\"\000\022:\n\010Rollback\022\024.rpc" +
+      ".RollbackRequest\032\026.google.protobuf.Empty" +
+      "\"\000B\026\n\nsample.rpcB\006SampleP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.EmptyProto.getDescriptor(),
         });
-    internal_static_rpc_ItemOrder_descriptor =
+    internal_static_rpc_CreateUserOnCassandraRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_rpc_ItemOrder_fieldAccessorTable = new
+    internal_static_rpc_CreateUserOnCassandraRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_rpc_ItemOrder_descriptor,
-        new java.lang.String[] { "ItemId", "Count", });
-    internal_static_rpc_PlaceOrderRequest_descriptor =
+        internal_static_rpc_CreateUserOnCassandraRequest_descriptor,
+        new java.lang.String[] { "UserId", "Name", "Password", });
+    internal_static_rpc_CreateUserOnCassandraResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_rpc_PlaceOrderRequest_fieldAccessorTable = new
+    internal_static_rpc_CreateUserOnCassandraResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_rpc_PlaceOrderRequest_descriptor,
-        new java.lang.String[] { "CustomerId", "ItemOrder", });
-    internal_static_rpc_PlaceOrderResponse_descriptor =
+        internal_static_rpc_CreateUserOnCassandraResponse_descriptor,
+        new java.lang.String[] { });
+    internal_static_rpc_GetUserRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_rpc_PlaceOrderResponse_fieldAccessorTable = new
+    internal_static_rpc_GetUserRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_rpc_PlaceOrderResponse_descriptor,
-        new java.lang.String[] { "OrderId", });
-    internal_static_rpc_Order_descriptor =
+        internal_static_rpc_GetUserRequest_descriptor,
+        new java.lang.String[] { "UserId", });
+    internal_static_rpc_GetUserResponse_descriptor =
       getDescriptor().getMessageTypes().get(3);
-    internal_static_rpc_Order_fieldAccessorTable = new
+    internal_static_rpc_GetUserResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_rpc_Order_descriptor,
-        new java.lang.String[] { "OrderId", "Timestamp", "CustomerId", "CustomerName", "Statement", "Total", });
-    internal_static_rpc_Statement_descriptor =
+        internal_static_rpc_GetUserResponse_descriptor,
+        new java.lang.String[] { "UserId", "Name", "Password", });
+    internal_static_rpc_CreatePostRequest_descriptor =
       getDescriptor().getMessageTypes().get(4);
-    internal_static_rpc_Statement_fieldAccessorTable = new
+    internal_static_rpc_CreatePostRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_rpc_Statement_descriptor,
-        new java.lang.String[] { "ItemId", "ItemName", "Price", "Count", "Total", });
-    internal_static_rpc_GetOrderRequest_descriptor =
+        internal_static_rpc_CreatePostRequest_descriptor,
+        new java.lang.String[] { "PostId", "UserId", "Content", });
+    internal_static_rpc_CreatePostResponse_descriptor =
       getDescriptor().getMessageTypes().get(5);
-    internal_static_rpc_GetOrderRequest_fieldAccessorTable = new
+    internal_static_rpc_CreatePostResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_rpc_GetOrderRequest_descriptor,
-        new java.lang.String[] { "OrderId", });
-    internal_static_rpc_GetOrderResponse_descriptor =
+        internal_static_rpc_CreatePostResponse_descriptor,
+        new java.lang.String[] { });
+    internal_static_rpc_GetPostRequest_descriptor =
       getDescriptor().getMessageTypes().get(6);
-    internal_static_rpc_GetOrderResponse_fieldAccessorTable = new
+    internal_static_rpc_GetPostRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_rpc_GetOrderResponse_descriptor,
-        new java.lang.String[] { "Order", });
-    internal_static_rpc_GetOrdersRequest_descriptor =
+        internal_static_rpc_GetPostRequest_descriptor,
+        new java.lang.String[] { "PostId", });
+    internal_static_rpc_GetPostResponse_descriptor =
       getDescriptor().getMessageTypes().get(7);
-    internal_static_rpc_GetOrdersRequest_fieldAccessorTable = new
+    internal_static_rpc_GetPostResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_rpc_GetOrdersRequest_descriptor,
-        new java.lang.String[] { "CustomerId", });
-    internal_static_rpc_GetOrdersResponse_descriptor =
+        internal_static_rpc_GetPostResponse_descriptor,
+        new java.lang.String[] { "PostId", "UserId", "Content", });
+    internal_static_rpc_CreateUserOnMysqlRequest_descriptor =
       getDescriptor().getMessageTypes().get(8);
-    internal_static_rpc_GetOrdersResponse_fieldAccessorTable = new
+    internal_static_rpc_CreateUserOnMysqlRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_rpc_GetOrdersResponse_descriptor,
-        new java.lang.String[] { "Order", });
-    internal_static_rpc_GetCustomerInfoRequest_descriptor =
-      getDescriptor().getMessageTypes().get(9);
-    internal_static_rpc_GetCustomerInfoRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_rpc_GetCustomerInfoRequest_descriptor,
-        new java.lang.String[] { "TransactionId", "CustomerId", "TransactionId", });
-    internal_static_rpc_GetCustomerInfoResponse_descriptor =
-      getDescriptor().getMessageTypes().get(10);
-    internal_static_rpc_GetCustomerInfoResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_rpc_GetCustomerInfoResponse_descriptor,
-        new java.lang.String[] { "Id", "Name", "CreditLimit", "CreditTotal", });
-    internal_static_rpc_PaymentRequest_descriptor =
-      getDescriptor().getMessageTypes().get(11);
-    internal_static_rpc_PaymentRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_rpc_PaymentRequest_descriptor,
-        new java.lang.String[] { "TransactionId", "CustomerId", "Amount", });
-    internal_static_rpc_RepaymentRequest_descriptor =
-      getDescriptor().getMessageTypes().get(12);
-    internal_static_rpc_RepaymentRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_rpc_RepaymentRequest_descriptor,
-        new java.lang.String[] { "CustomerId", "Amount", });
+        internal_static_rpc_CreateUserOnMysqlRequest_descriptor,
+        new java.lang.String[] { "UserId", "Name", "Password", "TransactionId", });
     internal_static_rpc_PrepareRequest_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_rpc_PrepareRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_rpc_PrepareRequest_descriptor,
         new java.lang.String[] { "TransactionId", });
     internal_static_rpc_ValidateRequest_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_rpc_ValidateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_rpc_ValidateRequest_descriptor,
         new java.lang.String[] { "TransactionId", });
     internal_static_rpc_CommitRequest_descriptor =
-      getDescriptor().getMessageTypes().get(15);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_rpc_CommitRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_rpc_CommitRequest_descriptor,
         new java.lang.String[] { "TransactionId", });
     internal_static_rpc_RollbackRequest_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_rpc_RollbackRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_rpc_RollbackRequest_descriptor,

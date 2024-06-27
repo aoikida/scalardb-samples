@@ -1,0 +1,24 @@
+{
+  "mysql.users": {
+    "transaction": true,
+    "partition-key": [
+      "user_id"
+    ],
+    "columns": {
+      "user_id": "INT",
+      "name": "TEXT",
+      "password": "TEXT"
+    }
+  },
+  "mysql.posts": {
+    "transaction": true,
+    "partition-key": [
+      "post_id"
+    ],
+    "columns": {
+      "post_id": "INT",
+      "user_id": "INT",
+      "content": "TEXT"
+    }
+  }
+}

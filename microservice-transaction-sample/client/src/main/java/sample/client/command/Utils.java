@@ -12,11 +12,11 @@ public final class Utils {
 
   private Utils() {}
 
-  public static ManagedChannel getCustomerServiceChannel() {
+  public static ManagedChannel getMysqlChannel() {
     return NettyChannelBuilder.forAddress("localhost", 10010).usePlaintext().build();
   }
 
-  public static ManagedChannel getOrderServiceChannel() {
+  public static ManagedChannel getCassandraChannel() {
     return NettyChannelBuilder.forAddress("localhost", 10020).usePlaintext().build();
   }
 

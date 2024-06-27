@@ -13,7 +13,7 @@ application {
     mainClassName = 'sample.client.Client'
 }
 
-archivesBaseName = "sample-order-service"
+archivesBaseName = "client"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8

@@ -1,10 +1,11 @@
 package sample.client;
-
-import sample.client.command.GetCustomerInfoCommand;
-import sample.client.command.GetOrderCommand;
-import sample.client.command.GetOrdersCommand;
-import sample.client.command.PlaceOrderCommand;
-import sample.client.command.RepaymentCommand;
+import sample.client.command.CreateUserCommand;
+import sample.client.command.GetUserFromMysqlCommand;
+import sample.client.command.GetUserFromCassandraCommand;
+import sample.client.command.CreatePostOnMysqlCommand;
+import sample.client.command.CreatePostOnCassandraCommand;
+import sample.client.command.GetPostFromMysqlCommand;
+import sample.client.command.GetPostFromCassandraCommand;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -13,11 +14,13 @@ import picocli.CommandLine.Option;
     name = "bin/client",
     description = "Sample application for Microservice Transaction",
     subcommands = {
-      PlaceOrderCommand.class,
-      GetOrderCommand.class,
-      GetOrdersCommand.class,
-      GetCustomerInfoCommand.class,
-      RepaymentCommand.class
+      CreateUserCommand.class,
+      GetUserFromMysqlCommand.class,
+      GetUserFromCassandraCommand.class,
+      CreatePostOnMysqlCommand.class,
+      CreatePostOnCassandraCommand.class,
+      GetPostFromMysqlCommand.class,
+      GetPostFromCassandraCommand.class,
     })
 public class Client implements Runnable {
 

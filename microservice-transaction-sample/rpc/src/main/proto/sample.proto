@@ -8,79 +8,80 @@ package rpc;
 
 import "google/protobuf/empty.proto";
 
-// for Order Service
-service OrderService {
-  // Place an order. It's a transaction that spans OrderService and CustomerService
-  rpc PlaceOrder(PlaceOrderRequest) returns (PlaceOrderResponse) {
+// for Cassandra
+service Cassandra {
+  //Create user infomation which spans mulitple databases
+  rpc CreateUserOnCassandra(CreateUserOnCassandraRequest) returns (CreateUserOnCassandraResponse) {
   }
-  // Get Order information by order ID
-  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse) {
+  //Get user information
+  rpc GetUser(GetUserRequest) returns (GetUserResponse) {
   }
-  // Get Order information by customer ID
-  rpc GetOrders(GetOrdersRequest) returns (GetOrdersResponse) {
+  //Create post information
+  rpc CreatePost(CreatePostRequest) returns (CreatePostResponse) {
+  }
+  //Get post information
+  rpc GetPost(GetPostRequest) returns (GetPostResponse) {
   }
 }
 
-message ItemOrder {
-  int32 item_id = 1;
-  int32 count = 2;
+
+message CreateUserOnCassandraRequest {
+  int32 user_id = 1;
+  string name = 2;
+  string password = 3;
 }
 
-message PlaceOrderRequest {
-  int32 customer_id = 1;
-  repeated ItemOrder item_order = 2;
+message CreateUserOnCassandraResponse {
+
 }
 
-message PlaceOrderResponse {
-  string order_id = 1;
+message GetUserRequest {
+  int32 user_id = 1;
 }
 
-message Order {
-  string order_id = 1;
-  int64 timestamp = 2;
-  int32 customer_id = 3;
-  string customer_name = 4;
-  repeated Statement statement = 5;
-  int32 total = 6;
+message GetUserResponse {
+  int32 user_id = 1;
+  string name = 2;
+  string password = 3;
 }
 
-message Statement {
-  int32 item_id = 1;
-  string item_name = 2;
-  int32 price = 3;
-  int32 count = 4;
-  int32 total = 5;
+message CreatePostRequest {
+  int32 post_id = 1;
+  int32 user_id = 2;
+  string content = 3;
 }
 
-message GetOrderRequest {
-  string order_id = 1;
+message CreatePostResponse {
+
 }
 
-message GetOrderResponse {
-  Order order = 1;
+message GetPostRequest {
+  int32 post_id = 1;
 }
 
-message GetOrdersRequest {
-  int32 customer_id = 1;
+message GetPostResponse {
+  int32 post_id = 1;
+  int32 user_id = 2;
+  string content = 3;
 }
 
-message GetOrdersResponse {
-  repeated Order order = 1;
-}
 
-// for Customer Service
-service CustomerService {
-  // Get customer information
-  rpc GetCustomerInfo(GetCustomerInfoRequest) returns (GetCustomerInfoResponse) {
+// for Mysql
+service Mysql {
+  //Get user information
+  rpc GetUser(GetUserRequest) returns (GetUserResponse) {
   }
-  // Credit card repayment
-  rpc Repayment(RepaymentRequest) returns (google.protobuf.Empty) {
+  //Create post information
+  rpc CreatePost(CreatePostRequest) returns (CreatePostResponse) {
+  }
+  //Get post information
+  rpc GetPost(GetPostRequest) returns (GetPostResponse) {
   }
 
   // RPCs for two-phase commit transactions
 
-  // Credit card payment
-  rpc Payment(PaymentRequest) returns (google.protobuf.Empty) {
+  //Create user infomation
+  rpc CreateUserOnMysql(CreateUserOnMysqlRequest) returns (google.protobuf.Empty) {
   }
   // Prepare the transaction
   rpc Prepare(PrepareRequest) returns (google.protobuf.Empty) {
@@ -96,27 +97,11 @@ service CustomerService {
   }
 }
 
-message GetCustomerInfoRequest {
-  optional string transaction_id = 1;
-  int32 customer_id = 2;
-}
-
-message GetCustomerInfoResponse {
-  int32 id = 1;
+message CreateUserOnMysqlRequest {
+  int32 user_id = 1;
   string name = 2;
-  int32 credit_limit = 3;
-  int32 credit_total = 4;
-}
-
-message PaymentRequest {
-  string transaction_id = 1;
-  int32 customer_id = 2;
-  int32 amount = 3;
-}
-
-message RepaymentRequest {
-  int32 customer_id = 1;
-  int32 amount = 2;
+  string password = 3;
+  string transaction_id = 4;
 }
 
 message PrepareRequest {
