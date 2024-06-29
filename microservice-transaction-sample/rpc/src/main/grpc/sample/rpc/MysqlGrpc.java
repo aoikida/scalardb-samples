@@ -111,6 +111,68 @@ public final class MysqlGrpc {
     return getGetPostMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<sample.rpc.GetAllPostsRequest,
+      sample.rpc.GetAllPostsResponse> getGetAllPostsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetAllPosts",
+      requestType = sample.rpc.GetAllPostsRequest.class,
+      responseType = sample.rpc.GetAllPostsResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<sample.rpc.GetAllPostsRequest,
+      sample.rpc.GetAllPostsResponse> getGetAllPostsMethod() {
+    io.grpc.MethodDescriptor<sample.rpc.GetAllPostsRequest, sample.rpc.GetAllPostsResponse> getGetAllPostsMethod;
+    if ((getGetAllPostsMethod = MysqlGrpc.getGetAllPostsMethod) == null) {
+      synchronized (MysqlGrpc.class) {
+        if ((getGetAllPostsMethod = MysqlGrpc.getGetAllPostsMethod) == null) {
+          MysqlGrpc.getGetAllPostsMethod = getGetAllPostsMethod =
+              io.grpc.MethodDescriptor.<sample.rpc.GetAllPostsRequest, sample.rpc.GetAllPostsResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetAllPosts"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  sample.rpc.GetAllPostsRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  sample.rpc.GetAllPostsResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new MysqlMethodDescriptorSupplier("GetAllPosts"))
+              .build();
+        }
+      }
+    }
+    return getGetAllPostsMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<sample.rpc.GetAllUsersRequest,
+      sample.rpc.GetAllUsersResponse> getGetAllUsersMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetAllUsers",
+      requestType = sample.rpc.GetAllUsersRequest.class,
+      responseType = sample.rpc.GetAllUsersResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<sample.rpc.GetAllUsersRequest,
+      sample.rpc.GetAllUsersResponse> getGetAllUsersMethod() {
+    io.grpc.MethodDescriptor<sample.rpc.GetAllUsersRequest, sample.rpc.GetAllUsersResponse> getGetAllUsersMethod;
+    if ((getGetAllUsersMethod = MysqlGrpc.getGetAllUsersMethod) == null) {
+      synchronized (MysqlGrpc.class) {
+        if ((getGetAllUsersMethod = MysqlGrpc.getGetAllUsersMethod) == null) {
+          MysqlGrpc.getGetAllUsersMethod = getGetAllUsersMethod =
+              io.grpc.MethodDescriptor.<sample.rpc.GetAllUsersRequest, sample.rpc.GetAllUsersResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetAllUsers"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  sample.rpc.GetAllUsersRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  sample.rpc.GetAllUsersResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new MysqlMethodDescriptorSupplier("GetAllUsers"))
+              .build();
+        }
+      }
+    }
+    return getGetAllUsersMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<sample.rpc.CreateUserOnMysqlRequest,
       com.google.protobuf.Empty> getCreateUserOnMysqlMethod;
 
@@ -348,6 +410,20 @@ public final class MysqlGrpc {
     }
 
     /**
+     */
+    public void getAllPosts(sample.rpc.GetAllPostsRequest request,
+        io.grpc.stub.StreamObserver<sample.rpc.GetAllPostsResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllPostsMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void getAllUsers(sample.rpc.GetAllUsersRequest request,
+        io.grpc.stub.StreamObserver<sample.rpc.GetAllUsersResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllUsersMethod(), responseObserver);
+    }
+
+    /**
      * <pre>
      *Create user infomation
      * </pre>
@@ -420,6 +496,20 @@ public final class MysqlGrpc {
                 sample.rpc.GetPostRequest,
                 sample.rpc.GetPostResponse>(
                   this, METHODID_GET_POST)))
+          .addMethod(
+            getGetAllPostsMethod(),
+            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+              new MethodHandlers<
+                sample.rpc.GetAllPostsRequest,
+                sample.rpc.GetAllPostsResponse>(
+                  this, METHODID_GET_ALL_POSTS)))
+          .addMethod(
+            getGetAllUsersMethod(),
+            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+              new MethodHandlers<
+                sample.rpc.GetAllUsersRequest,
+                sample.rpc.GetAllUsersResponse>(
+                  this, METHODID_GET_ALL_USERS)))
           .addMethod(
             getCreateUserOnMysqlMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -507,6 +597,22 @@ public final class MysqlGrpc {
         io.grpc.stub.StreamObserver<sample.rpc.GetPostResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetPostMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getAllPosts(sample.rpc.GetAllPostsRequest request,
+        io.grpc.stub.StreamObserver<sample.rpc.GetAllPostsResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getGetAllPostsMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getAllUsers(sample.rpc.GetAllUsersRequest request,
+        io.grpc.stub.StreamObserver<sample.rpc.GetAllUsersResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getGetAllUsersMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -610,6 +716,22 @@ public final class MysqlGrpc {
     public sample.rpc.GetPostResponse getPost(sample.rpc.GetPostRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetPostMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<sample.rpc.GetAllPostsResponse> getAllPosts(
+        sample.rpc.GetAllPostsRequest request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getGetAllPostsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<sample.rpc.GetAllUsersResponse> getAllUsers(
+        sample.rpc.GetAllUsersRequest request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getGetAllUsersMethod(), getCallOptions(), request);
     }
 
     /**
@@ -772,11 +894,13 @@ public final class MysqlGrpc {
   private static final int METHODID_GET_USER = 0;
   private static final int METHODID_CREATE_POST = 1;
   private static final int METHODID_GET_POST = 2;
-  private static final int METHODID_CREATE_USER_ON_MYSQL = 3;
-  private static final int METHODID_PREPARE = 4;
-  private static final int METHODID_VALIDATE = 5;
-  private static final int METHODID_COMMIT = 6;
-  private static final int METHODID_ROLLBACK = 7;
+  private static final int METHODID_GET_ALL_POSTS = 3;
+  private static final int METHODID_GET_ALL_USERS = 4;
+  private static final int METHODID_CREATE_USER_ON_MYSQL = 5;
+  private static final int METHODID_PREPARE = 6;
+  private static final int METHODID_VALIDATE = 7;
+  private static final int METHODID_COMMIT = 8;
+  private static final int METHODID_ROLLBACK = 9;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -806,6 +930,14 @@ public final class MysqlGrpc {
         case METHODID_GET_POST:
           serviceImpl.getPost((sample.rpc.GetPostRequest) request,
               (io.grpc.stub.StreamObserver<sample.rpc.GetPostResponse>) responseObserver);
+          break;
+        case METHODID_GET_ALL_POSTS:
+          serviceImpl.getAllPosts((sample.rpc.GetAllPostsRequest) request,
+              (io.grpc.stub.StreamObserver<sample.rpc.GetAllPostsResponse>) responseObserver);
+          break;
+        case METHODID_GET_ALL_USERS:
+          serviceImpl.getAllUsers((sample.rpc.GetAllUsersRequest) request,
+              (io.grpc.stub.StreamObserver<sample.rpc.GetAllUsersResponse>) responseObserver);
           break;
         case METHODID_CREATE_USER_ON_MYSQL:
           serviceImpl.createUserOnMysql((sample.rpc.CreateUserOnMysqlRequest) request,
@@ -891,6 +1023,8 @@ public final class MysqlGrpc {
               .addMethod(getGetUserMethod())
               .addMethod(getCreatePostMethod())
               .addMethod(getGetPostMethod())
+              .addMethod(getGetAllPostsMethod())
+              .addMethod(getGetAllUsersMethod())
               .addMethod(getCreateUserOnMysqlMethod())
               .addMethod(getPrepareMethod())
               .addMethod(getValidateMethod())

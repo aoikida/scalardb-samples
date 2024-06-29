@@ -247,7 +247,7 @@ The following sections describe how to execute transactions and retrieve data in
 Create user information on MySQL and Cassandra by running the following command:
 
 ```console
-./gradlew :client:run --args="CreateUser 4 Kida password"
+./gradlew :client:run --args="CreateUser Kida password"
 ```
 
 *This command needs distributed transaction*
@@ -272,16 +272,35 @@ You should see the following output:
 ...
 ```
 
+### Get all users
+
+Get all users by running the following command:
+```console
+./gradlew :client:run --args="GetAllUsersFromMysql"
+```
+
+```console
+./gradlew :client:run --args="GetAllUsersFromCassandra"
+```
+
+You should see the following output:
+
+```console
+...
+{"users": [{"user_id": 1,"name": "A","password": "a"},{"user_id": 2,"name": "B","password": "b"},{"user_id": 3,"name": "C","password": "c"},{"user_id": 4,"name": "Kida","password": "password"}]}
+...
+```
+
 ### Create post
 
 Create Post by running the following command:
 
 ```console
-./gradlew :client:run --args="CreatePostOnMysql 4 4 MySQL,Konnichiwa! "
+./gradlew :client:run --args="CreatePostOnMysql 4 MySQL,Konnichiwa! "
 ```
 
 ```console
-./gradlew :client:run --args="CreatePostOnCassandra 4 4 Cassandra,Konnichiwa! "
+./gradlew :client:run --args="CreatePostOnCassandra 4 Cassandra,Konnichiwa! "
 ```
 
 ### Get Post
@@ -294,6 +313,17 @@ Get Post by running the following command:
 
 ```console
 ./gradlew :client:run --args="GetPostFromCassandra 4"
+```
+
+### Get all posts
+
+Get all posts by running the following command:
+```console
+./gradlew :client:run --args="GetAllPostsFromMysql"
+```
+
+```console
+./gradlew :client:run --args="GetAllPostsFromCassandra"
 ```
 
 

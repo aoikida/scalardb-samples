@@ -39,6 +39,10 @@ import sample.rpc.GetUserResponse;
 import sample.rpc.PrepareRequest;
 import sample.rpc.RollbackRequest;
 import sample.rpc.ValidateRequest;
+import sample.rpc.GetAllPostsRequest;
+import sample.rpc.GetAllPostsResponse;
+import sample.rpc.GetAllUsersRequest;
+import sample.rpc.GetAllUsersResponse;
 
 public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closeable {
   private static final Logger logger = LoggerFactory.getLogger(Cassandra.class);
@@ -56,6 +60,8 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
   private interface TransactionFunction<T, R> {
     R apply(T t) throws TransactionException;
   }
+
+  private Latest latest = new Latest();
 
   public Cassandra(String configFile) throws TransactionException, IOException {
     // Initialize the transaction manager
@@ -115,8 +121,9 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
     execOperationsAsCoordinator(
         "createUser",
         transaction -> {
-          User.put(transaction, request.getUserId(), request.getName(), request.getPassword());
-          callCreateUserEndpoint(request.getUserId(), request.getName(), request.getPassword(), transaction.getId());
+          User.put(transaction, latest.userId, request.getName(), request.getPassword());
+          callCreateUserEndpoint(latest.userId, request.getName(), request.getPassword(), transaction.getId());
+          latest.userId++;
           return CreateUserOnCassandraResponse.newBuilder().build();
         }, responseObserver);
   }
@@ -144,7 +151,30 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
     };
 
     execOperations(funcName, operations, responseObserver);
+  }
 
+  @Override
+  public void getAllUsers(GetAllUsersRequest request, StreamObserver<GetAllUsersResponse> responseObserver) {
+    String funcName = "getAllUsers";
+    //This function processing operations can be used in normal transactions
+    //interface transactions.
+    TransactionFunction<TransactionCrudOperable, GetAllUsersResponse> operations = transaction -> {
+      // Get all users
+      GetAllUsersResponse.Builder response = GetAllUsersResponse.newBuilder();
+      for (int i = 1; i < latest.userId; i++) {
+        Optional<User> user = User.get(transaction, i);
+        if (user.isPresent()) {
+          response.addUsers(
+            sample.rpc.User.newBuilder()
+                  .setUserId(user.get().userId)
+                  .setName(user.get().name)
+                  .setPassword(user.get().password)
+                  .build());
+        }
+      }
+      return response.build();
+    };
+    execOperations(funcName, operations, responseObserver);
   }
 
   @Override
@@ -153,7 +183,8 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
     //This function processing operations can be used in nomal transactions
     //interface transactions.
     TransactionFunction<TransactionCrudOperable, CreatePostResponse> operations = transaction -> {
-      Post.put(transaction, request.getPostId(), request.getUserId(), request.getContent());
+      Post.put(transaction, latest.postId, request.getUserId(), request.getContent());
+      latest.postId++;
       return CreatePostResponse.newBuilder().build();
     };
     execOperations(funcName, operations, responseObserver);
@@ -174,6 +205,30 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
           .setUserId(post.get().userId)
           .setContent(post.get().content)
           .build();
+    };
+    execOperations(funcName, operations, responseObserver);
+  }
+
+  @Override
+  public void getAllPosts(GetAllPostsRequest request, StreamObserver<GetAllPostsResponse> responseObserver) {
+    String funcName = "getAllPosts";
+    //This function processing operations can be used in nomal transactions
+    //interface transactions.
+    TransactionFunction<TransactionCrudOperable, GetAllPostsResponse> operations = transaction -> {
+      // Get all posts
+      GetAllPostsResponse.Builder response =GetAllPostsResponse.newBuilder();
+      for (int i = 1; i < latest.postId; i++) {
+        Optional<Post> post = Post.get(transaction, i);
+        if (post.isPresent()) {
+          response.addPosts(
+              sample.rpc.Post.newBuilder()
+                  .setPostId(post.get().postId)
+                  .setUserId(post.get().userId)
+                  .setContent(post.get().content)
+                  .build());
+        }
+      }
+      return response.build();
     };
     execOperations(funcName, operations, responseObserver);
   }

@@ -142,6 +142,68 @@ public final class CassandraGrpc {
     return getGetPostMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<sample.rpc.GetAllPostsRequest,
+      sample.rpc.GetAllPostsResponse> getGetAllPostsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetAllPosts",
+      requestType = sample.rpc.GetAllPostsRequest.class,
+      responseType = sample.rpc.GetAllPostsResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<sample.rpc.GetAllPostsRequest,
+      sample.rpc.GetAllPostsResponse> getGetAllPostsMethod() {
+    io.grpc.MethodDescriptor<sample.rpc.GetAllPostsRequest, sample.rpc.GetAllPostsResponse> getGetAllPostsMethod;
+    if ((getGetAllPostsMethod = CassandraGrpc.getGetAllPostsMethod) == null) {
+      synchronized (CassandraGrpc.class) {
+        if ((getGetAllPostsMethod = CassandraGrpc.getGetAllPostsMethod) == null) {
+          CassandraGrpc.getGetAllPostsMethod = getGetAllPostsMethod =
+              io.grpc.MethodDescriptor.<sample.rpc.GetAllPostsRequest, sample.rpc.GetAllPostsResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetAllPosts"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  sample.rpc.GetAllPostsRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  sample.rpc.GetAllPostsResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new CassandraMethodDescriptorSupplier("GetAllPosts"))
+              .build();
+        }
+      }
+    }
+    return getGetAllPostsMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<sample.rpc.GetAllUsersRequest,
+      sample.rpc.GetAllUsersResponse> getGetAllUsersMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetAllUsers",
+      requestType = sample.rpc.GetAllUsersRequest.class,
+      responseType = sample.rpc.GetAllUsersResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<sample.rpc.GetAllUsersRequest,
+      sample.rpc.GetAllUsersResponse> getGetAllUsersMethod() {
+    io.grpc.MethodDescriptor<sample.rpc.GetAllUsersRequest, sample.rpc.GetAllUsersResponse> getGetAllUsersMethod;
+    if ((getGetAllUsersMethod = CassandraGrpc.getGetAllUsersMethod) == null) {
+      synchronized (CassandraGrpc.class) {
+        if ((getGetAllUsersMethod = CassandraGrpc.getGetAllUsersMethod) == null) {
+          CassandraGrpc.getGetAllUsersMethod = getGetAllUsersMethod =
+              io.grpc.MethodDescriptor.<sample.rpc.GetAllUsersRequest, sample.rpc.GetAllUsersResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetAllUsers"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  sample.rpc.GetAllUsersRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  sample.rpc.GetAllUsersResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new CassandraMethodDescriptorSupplier("GetAllUsers"))
+              .build();
+        }
+      }
+    }
+    return getGetAllUsersMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -233,6 +295,20 @@ public final class CassandraGrpc {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetPostMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void getAllPosts(sample.rpc.GetAllPostsRequest request,
+        io.grpc.stub.StreamObserver<sample.rpc.GetAllPostsResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllPostsMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void getAllUsers(sample.rpc.GetAllUsersRequest request,
+        io.grpc.stub.StreamObserver<sample.rpc.GetAllUsersResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllUsersMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -263,6 +339,20 @@ public final class CassandraGrpc {
                 sample.rpc.GetPostRequest,
                 sample.rpc.GetPostResponse>(
                   this, METHODID_GET_POST)))
+          .addMethod(
+            getGetAllPostsMethod(),
+            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+              new MethodHandlers<
+                sample.rpc.GetAllPostsRequest,
+                sample.rpc.GetAllPostsResponse>(
+                  this, METHODID_GET_ALL_POSTS)))
+          .addMethod(
+            getGetAllUsersMethod(),
+            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+              new MethodHandlers<
+                sample.rpc.GetAllUsersRequest,
+                sample.rpc.GetAllUsersResponse>(
+                  this, METHODID_GET_ALL_USERS)))
           .build();
     }
   }
@@ -327,6 +417,22 @@ public final class CassandraGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetPostMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void getAllPosts(sample.rpc.GetAllPostsRequest request,
+        io.grpc.stub.StreamObserver<sample.rpc.GetAllPostsResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getGetAllPostsMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getAllUsers(sample.rpc.GetAllUsersRequest request,
+        io.grpc.stub.StreamObserver<sample.rpc.GetAllUsersResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getGetAllUsersMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -384,6 +490,22 @@ public final class CassandraGrpc {
     public sample.rpc.GetPostResponse getPost(sample.rpc.GetPostRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetPostMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<sample.rpc.GetAllPostsResponse> getAllPosts(
+        sample.rpc.GetAllPostsRequest request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getGetAllPostsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<sample.rpc.GetAllUsersResponse> getAllUsers(
+        sample.rpc.GetAllUsersRequest request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getGetAllUsersMethod(), getCallOptions(), request);
     }
   }
 
@@ -453,6 +575,8 @@ public final class CassandraGrpc {
   private static final int METHODID_GET_USER = 1;
   private static final int METHODID_CREATE_POST = 2;
   private static final int METHODID_GET_POST = 3;
+  private static final int METHODID_GET_ALL_POSTS = 4;
+  private static final int METHODID_GET_ALL_USERS = 5;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -486,6 +610,14 @@ public final class CassandraGrpc {
         case METHODID_GET_POST:
           serviceImpl.getPost((sample.rpc.GetPostRequest) request,
               (io.grpc.stub.StreamObserver<sample.rpc.GetPostResponse>) responseObserver);
+          break;
+        case METHODID_GET_ALL_POSTS:
+          serviceImpl.getAllPosts((sample.rpc.GetAllPostsRequest) request,
+              (io.grpc.stub.StreamObserver<sample.rpc.GetAllPostsResponse>) responseObserver);
+          break;
+        case METHODID_GET_ALL_USERS:
+          serviceImpl.getAllUsers((sample.rpc.GetAllUsersRequest) request,
+              (io.grpc.stub.StreamObserver<sample.rpc.GetAllUsersResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -552,6 +684,8 @@ public final class CassandraGrpc {
               .addMethod(getGetUserMethod())
               .addMethod(getCreatePostMethod())
               .addMethod(getGetPostMethod())
+              .addMethod(getGetAllPostsMethod())
+              .addMethod(getGetAllUsersMethod())
               .build();
         }
       }

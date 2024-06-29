@@ -12,13 +12,11 @@ import sample.rpc.CreatePostResponse;
 
 public class CreatePostOnCassandraCommand implements Callable<Integer> {
 
-  @Parameters(index = "0", paramLabel = "POST_ID", description = "post id")
-  private int postId;
 
-  @Parameters(index = "1", paramLabel = "USER_ID", description = "user id")
+  @Parameters(index = "0", paramLabel = "USER_ID", description = "user id")
   private int userId;
 
-  @Parameters(index = "2", paramLabel = "CONTENT", description = "content")
+  @Parameters(index = "1", paramLabel = "CONTENT", description = "content")
   private String content;
 
   @Override
@@ -26,10 +24,8 @@ public class CreatePostOnCassandraCommand implements Callable<Integer> {
     ManagedChannel channel = Utils.getCassandraChannel();
     try {
       CassandraGrpc.CassandraBlockingStub stub = CassandraGrpc.newBlockingStub(channel);
-      System.out.println("CreatePostOnCassandraCommand.call() postId=" + postId + " userId=" + userId + " content=" + content +"channel=" + channel);
       CreatePostResponse response = stub.createPost(
           CreatePostRequest.newBuilder()
-              .setPostId(postId)
               .setUserId(userId)
               .setContent(content)
               .build());

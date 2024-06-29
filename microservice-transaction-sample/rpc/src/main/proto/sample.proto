@@ -22,6 +22,12 @@ service Cassandra {
   //Get post information
   rpc GetPost(GetPostRequest) returns (GetPostResponse) {
   }
+
+  rpc GetAllPosts(GetAllPostsRequest) returns (stream GetAllPostsResponse) {
+  }
+
+  rpc GetAllUsers(GetAllUsersRequest) returns (stream GetAllUsersResponse) {
+  }
 }
 
 
@@ -33,6 +39,18 @@ message CreateUserOnCassandraRequest {
 
 message CreateUserOnCassandraResponse {
 
+}
+
+message Post {
+  int32 post_id = 1;
+  int32 user_id = 2;
+  string content = 3;
+}
+
+message User {
+  int32 user_id = 1;
+  string name = 2;
+  string password = 3;
 }
 
 message GetUserRequest {
@@ -65,6 +83,22 @@ message GetPostResponse {
   string content = 3;
 }
 
+message GetAllPostsRequest {
+
+}
+
+message GetAllPostsResponse {
+  repeated Post posts = 1;
+}
+
+message GetAllUsersRequest {
+
+}
+
+message GetAllUsersResponse {
+  repeated User users = 1;
+}
+
 
 // for Mysql
 service Mysql {
@@ -76,6 +110,12 @@ service Mysql {
   }
   //Get post information
   rpc GetPost(GetPostRequest) returns (GetPostResponse) {
+  }
+
+  rpc GetAllPosts(GetAllPostsRequest) returns (stream GetAllPostsResponse) {
+  }
+
+  rpc GetAllUsers(GetAllUsersRequest) returns (stream GetAllUsersResponse) {
   }
 
   // RPCs for two-phase commit transactions

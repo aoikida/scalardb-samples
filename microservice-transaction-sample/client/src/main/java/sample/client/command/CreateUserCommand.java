@@ -13,13 +13,10 @@ import sample.rpc.CreateUserOnCassandraResponse;
 //分散トランザクション
 public class CreateUserCommand implements Callable<Integer> {
 
-  @Parameters(index = "0", paramLabel = "USER_ID", description = "user id")
-  private int userId;
-
-  @Parameters(index = "1", paramLabel = "NAME", description = "name")
+  @Parameters(index = "0", paramLabel = "NAME", description = "name")
   private String name;
 
-  @Parameters(index = "2", paramLabel = "PASSWORD", description = "password")
+  @Parameters(index = "1", paramLabel = "PASSWORD", description = "password")
   private String password;
 
   @Override
@@ -27,10 +24,9 @@ public class CreateUserCommand implements Callable<Integer> {
     ManagedChannel channel = Utils.getCassandraChannel();
     try {
       CassandraGrpc.CassandraBlockingStub stub = CassandraGrpc.newBlockingStub(channel);
-      System.out.println("CreateUserCommand.call() userId=" + userId + " name=" + name + " password=" + password + "channel=" + channel);
+      System.out.println("CreateUserCommand.call() name=" + name + " password=" + password + "channel=" + channel);
       CreateUserOnCassandraResponse response  = stub.createUserOnCassandra(
           CreateUserOnCassandraRequest.newBuilder()
-              .setUserId(userId)
               .setName(name)
               .setPassword(password)
               .build());
