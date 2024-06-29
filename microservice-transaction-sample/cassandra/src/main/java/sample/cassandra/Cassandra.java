@@ -39,6 +39,10 @@ import sample.rpc.GetUserResponse;
 import sample.rpc.PrepareRequest;
 import sample.rpc.RollbackRequest;
 import sample.rpc.ValidateRequest;
+import sample.rpc.GetAllPostsRequest;
+import sample.rpc.GetAllPostsResponse;
+import sample.rpc.GetAllUsersRequest;
+import sample.rpc.GetAllUsersResponse;
 
 public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closeable {
   private static final Logger logger = LoggerFactory.getLogger(Cassandra.class);
@@ -147,7 +151,30 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
     };
 
     execOperations(funcName, operations, responseObserver);
+  }
 
+  @Override
+  public void getAllUsers(GetAllUsersRequest request, StreamObserver<GetAllUsersResponse> responseObserver) {
+    String funcName = "getAllUsers";
+    //This function processing operations can be used in normal transactions
+    //interface transactions.
+    TransactionFunction<TransactionCrudOperable, GetAllUsersResponse> operations = transaction -> {
+      // Get all users
+      GetAllUsersResponse.Builder response = GetAllUsersResponse.newBuilder();
+      for (int i = 1; i < latest.userId; i++) {
+        Optional<User> user = User.get(transaction, i);
+        if (user.isPresent()) {
+          response.addUsers(
+            sample.rpc.User.newBuilder()
+                  .setUserId(user.get().userId)
+                  .setName(user.get().name)
+                  .setPassword(user.get().password)
+                  .build());
+        }
+      }
+      return response.build();
+    };
+    execOperations(funcName, operations, responseObserver);
   }
 
   @Override
@@ -183,13 +210,13 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
   }
 
   @Override
-  public void getAllPosts(sample.rpc.GetAllPostsRequest request, io.grpc.stub.StreamObserver<sample.rpc.GetAllPostsResponse> responseObserver) {
+  public void getAllPosts(GetAllPostsRequest request, StreamObserver<GetAllPostsResponse> responseObserver) {
     String funcName = "getAllPosts";
     //This function processing operations can be used in nomal transactions
     //interface transactions.
-    TransactionFunction<TransactionCrudOperable, sample.rpc.GetAllPostsResponse> operations = transaction -> {
+    TransactionFunction<TransactionCrudOperable, GetAllPostsResponse> operations = transaction -> {
       // Get all posts
-      sample.rpc.GetAllPostsResponse.Builder response = sample.rpc.GetAllPostsResponse.newBuilder();
+      GetAllPostsResponse.Builder response =GetAllPostsResponse.newBuilder();
       for (int i = 1; i < latest.postId; i++) {
         Optional<Post> post = Post.get(transaction, i);
         if (post.isPresent()) {

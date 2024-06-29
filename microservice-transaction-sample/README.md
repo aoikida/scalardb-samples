@@ -272,6 +272,25 @@ You should see the following output:
 ...
 ```
 
+### Get all users
+
+Get all users by running the following command:
+```console
+./gradlew :client:run --args="GetAllUsersFromMysql"
+```
+
+```console
+./gradlew :client:run --args="GetAllUsersFromCassandra"
+```
+
+You should see the following output:
+
+```console
+...
+{"users": [{"user_id": 1,"name": "A","password": "a"},{"user_id": 2,"name": "B","password": "b"},{"user_id": 3,"name": "C","password": "c"},{"user_id": 4,"name": "Kida","password": "password"}]}
+...
+```
+
 ### Create post
 
 Create Post by running the following command:
@@ -294,6 +313,17 @@ Get Post by running the following command:
 
 ```console
 ./gradlew :client:run --args="GetPostFromCassandra 4"
+```
+
+### Get all posts
+
+Get all posts by running the following command:
+```console
+./gradlew :client:run --args="GetAllPostsFromMysql"
+```
+
+```console
+./gradlew :client:run --args="GetAllPostsFromCassandra"
 ```
 
 

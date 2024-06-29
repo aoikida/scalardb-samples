@@ -6,6 +6,8 @@ import sample.client.command.CreatePostOnMysqlCommand;
 import sample.client.command.CreatePostOnCassandraCommand;
 import sample.client.command.GetPostFromMysqlCommand;
 import sample.client.command.GetPostFromCassandraCommand;
+import sample.client.command.GetAllUsersFromMysqlCommand;
+import sample.client.command.GetAllUsersFromCassandraCommand;
 import sample.client.command.GetAllPostsFromMysqlCommand;
 import sample.client.command.GetAllPostsFromCassandraCommand;
 import picocli.CommandLine;
@@ -23,6 +25,8 @@ import picocli.CommandLine.Option;
       CreatePostOnCassandraCommand.class,
       GetPostFromMysqlCommand.class,
       GetPostFromCassandraCommand.class,
+      GetAllUsersFromMysqlCommand.class,
+      GetAllUsersFromCassandraCommand.class,
       GetAllPostsFromMysqlCommand.class,
       GetAllPostsFromCassandraCommand.class
     })
