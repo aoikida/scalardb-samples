@@ -1,1 +1,1 @@
-const signIn = async (userName: string, password: string) => {};
+export const signIn = async (userName: string, password: string) => {};
