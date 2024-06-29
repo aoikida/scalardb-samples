@@ -182,6 +182,30 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
     execOperations(funcName, operations, responseObserver);
   }
 
+  @Override
+  public void getAllPosts(sample.rpc.GetAllPostsRequest request, io.grpc.stub.StreamObserver<sample.rpc.GetAllPostsResponse> responseObserver) {
+    String funcName = "getAllPosts";
+    //This function processing operations can be used in nomal transactions
+    //interface transactions.
+    TransactionFunction<TransactionCrudOperable, sample.rpc.GetAllPostsResponse> operations = transaction -> {
+      // Get all posts
+      sample.rpc.GetAllPostsResponse.Builder response = sample.rpc.GetAllPostsResponse.newBuilder();
+      for (int i = 1; i < latest.postId; i++) {
+        Optional<Post> post = Post.get(transaction, i);
+        if (post.isPresent()) {
+          response.addPosts(
+              sample.rpc.Post.newBuilder()
+                  .setPostId(post.get().postId)
+                  .setUserId(post.get().userId)
+                  .setContent(post.get().content)
+                  .build());
+        }
+      }
+      return response.build();
+    };
+    execOperations(funcName, operations, responseObserver);
+  }
+
   private void rollbackTransaction(@Nullable TwoPhaseCommitTransaction transaction) {
     if (transaction == null) {
       return;

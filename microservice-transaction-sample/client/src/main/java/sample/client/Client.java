@@ -6,6 +6,8 @@ import sample.client.command.CreatePostOnMysqlCommand;
 import sample.client.command.CreatePostOnCassandraCommand;
 import sample.client.command.GetPostFromMysqlCommand;
 import sample.client.command.GetPostFromCassandraCommand;
+import sample.client.command.GetAllPostsFromMysqlCommand;
+import sample.client.command.GetAllPostsFromCassandraCommand;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -21,6 +23,8 @@ import picocli.CommandLine.Option;
       CreatePostOnCassandraCommand.class,
       GetPostFromMysqlCommand.class,
       GetPostFromCassandraCommand.class,
+      GetAllPostsFromMysqlCommand.class,
+      GetAllPostsFromCassandraCommand.class
     })
 public class Client implements Runnable {
 

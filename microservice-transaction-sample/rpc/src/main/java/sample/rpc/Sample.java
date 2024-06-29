@@ -25,6 +25,11 @@ public final class Sample {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_rpc_CreateUserOnCassandraResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_rpc_Post_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_rpc_Post_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_rpc_GetUserRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -54,6 +59,16 @@ public final class Sample {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_rpc_GetPostResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_rpc_GetAllPostsRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_rpc_GetAllPostsRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_rpc_GetAllPostsResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_rpc_GetAllPostsResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_rpc_CreateUserOnMysqlRequest_descriptor;
   static final 
@@ -92,41 +107,48 @@ public final class Sample {
       "ty.proto\"O\n\034CreateUserOnCassandraRequest" +
       "\022\017\n\007user_id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\020\n\010passw" +
       "ord\030\003 \001(\t\"\037\n\035CreateUserOnCassandraRespon" +
-      "se\"!\n\016GetUserRequest\022\017\n\007user_id\030\001 \001(\005\"B\n" +
-      "\017GetUserResponse\022\017\n\007user_id\030\001 \001(\005\022\014\n\004nam" +
-      "e\030\002 \001(\t\022\020\n\010password\030\003 \001(\t\"F\n\021CreatePostR" +
-      "equest\022\017\n\007post_id\030\001 \001(\005\022\017\n\007user_id\030\002 \001(\005" +
-      "\022\017\n\007content\030\003 \001(\t\"\024\n\022CreatePostResponse\"" +
-      "!\n\016GetPostRequest\022\017\n\007post_id\030\001 \001(\005\"D\n\017Ge" +
-      "tPostResponse\022\017\n\007post_id\030\001 \001(\005\022\017\n\007user_i" +
-      "d\030\002 \001(\005\022\017\n\007content\030\003 \001(\t\"c\n\030CreateUserOn" +
-      "MysqlRequest\022\017\n\007user_id\030\001 \001(\005\022\014\n\004name\030\002 " +
-      "\001(\t\022\020\n\010password\030\003 \001(\t\022\026\n\016transaction_id\030" +
-      "\004 \001(\t\"(\n\016PrepareRequest\022\026\n\016transaction_i" +
-      "d\030\001 \001(\t\")\n\017ValidateRequest\022\026\n\016transactio" +
-      "n_id\030\001 \001(\t\"\'\n\rCommitRequest\022\026\n\016transacti" +
-      "on_id\030\001 \001(\t\")\n\017RollbackRequest\022\026\n\016transa" +
-      "ction_id\030\001 \001(\t2\236\002\n\tCassandra\022`\n\025CreateUs" +
-      "erOnCassandra\022!.rpc.CreateUserOnCassandr" +
-      "aRequest\032\".rpc.CreateUserOnCassandraResp" +
-      "onse\"\000\0226\n\007GetUser\022\023.rpc.GetUserRequest\032\024" +
-      ".rpc.GetUserResponse\"\000\022?\n\nCreatePost\022\026.r" +
-      "pc.CreatePostRequest\032\027.rpc.CreatePostRes" +
-      "ponse\"\000\0226\n\007GetPost\022\023.rpc.GetPostRequest\032" +
-      "\024.rpc.GetPostResponse\"\0002\360\003\n\005Mysql\0226\n\007Get" +
+      "se\"9\n\004Post\022\017\n\007post_id\030\001 \001(\005\022\017\n\007user_id\030\002" +
+      " \001(\005\022\017\n\007content\030\003 \001(\t\"!\n\016GetUserRequest\022" +
+      "\017\n\007user_id\030\001 \001(\005\"B\n\017GetUserResponse\022\017\n\007u" +
+      "ser_id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\020\n\010password\030\003" +
+      " \001(\t\"F\n\021CreatePostRequest\022\017\n\007post_id\030\001 \001" +
+      "(\005\022\017\n\007user_id\030\002 \001(\005\022\017\n\007content\030\003 \001(\t\"\024\n\022" +
+      "CreatePostResponse\"!\n\016GetPostRequest\022\017\n\007" +
+      "post_id\030\001 \001(\005\"D\n\017GetPostResponse\022\017\n\007post" +
+      "_id\030\001 \001(\005\022\017\n\007user_id\030\002 \001(\005\022\017\n\007content\030\003 " +
+      "\001(\t\"\024\n\022GetAllPostsRequest\"/\n\023GetAllPosts" +
+      "Response\022\030\n\005posts\030\001 \003(\0132\t.rpc.Post\"c\n\030Cr" +
+      "eateUserOnMysqlRequest\022\017\n\007user_id\030\001 \001(\005\022" +
+      "\014\n\004name\030\002 \001(\t\022\020\n\010password\030\003 \001(\t\022\026\n\016trans" +
+      "action_id\030\004 \001(\t\"(\n\016PrepareRequest\022\026\n\016tra" +
+      "nsaction_id\030\001 \001(\t\")\n\017ValidateRequest\022\026\n\016" +
+      "transaction_id\030\001 \001(\t\"\'\n\rCommitRequest\022\026\n" +
+      "\016transaction_id\030\001 \001(\t\")\n\017RollbackRequest" +
+      "\022\026\n\016transaction_id\030\001 \001(\t2\344\002\n\tCassandra\022`" +
+      "\n\025CreateUserOnCassandra\022!.rpc.CreateUser" +
+      "OnCassandraRequest\032\".rpc.CreateUserOnCas" +
+      "sandraResponse\"\000\0226\n\007GetUser\022\023.rpc.GetUse" +
+      "rRequest\032\024.rpc.GetUserResponse\"\000\022?\n\nCrea" +
+      "tePost\022\026.rpc.CreatePostRequest\032\027.rpc.Cre" +
+      "atePostResponse\"\000\0226\n\007GetPost\022\023.rpc.GetPo" +
+      "stRequest\032\024.rpc.GetPostResponse\"\000\022D\n\013Get" +
+      "AllPosts\022\027.rpc.GetAllPostsRequest\032\030.rpc." +
+      "GetAllPostsResponse\"\0000\0012\266\004\n\005Mysql\0226\n\007Get" +
       "User\022\023.rpc.GetUserRequest\032\024.rpc.GetUserR" +
       "esponse\"\000\022?\n\nCreatePost\022\026.rpc.CreatePost" +
       "Request\032\027.rpc.CreatePostResponse\"\000\0226\n\007Ge" +
       "tPost\022\023.rpc.GetPostRequest\032\024.rpc.GetPost" +
-      "Response\"\000\022L\n\021CreateUserOnMysql\022\035.rpc.Cr" +
-      "eateUserOnMysqlRequest\032\026.google.protobuf" +
-      ".Empty\"\000\0228\n\007Prepare\022\023.rpc.PrepareRequest" +
-      "\032\026.google.protobuf.Empty\"\000\022:\n\010Validate\022\024" +
-      ".rpc.ValidateRequest\032\026.google.protobuf.E" +
-      "mpty\"\000\0226\n\006Commit\022\022.rpc.CommitRequest\032\026.g" +
-      "oogle.protobuf.Empty\"\000\022:\n\010Rollback\022\024.rpc" +
-      ".RollbackRequest\032\026.google.protobuf.Empty" +
-      "\"\000B\026\n\nsample.rpcB\006SampleP\001b\006proto3"
+      "Response\"\000\022D\n\013GetAllPosts\022\027.rpc.GetAllPo" +
+      "stsRequest\032\030.rpc.GetAllPostsResponse\"\0000\001" +
+      "\022L\n\021CreateUserOnMysql\022\035.rpc.CreateUserOn" +
+      "MysqlRequest\032\026.google.protobuf.Empty\"\000\0228" +
+      "\n\007Prepare\022\023.rpc.PrepareRequest\032\026.google." +
+      "protobuf.Empty\"\000\022:\n\010Validate\022\024.rpc.Valid" +
+      "ateRequest\032\026.google.protobuf.Empty\"\000\0226\n\006" +
+      "Commit\022\022.rpc.CommitRequest\032\026.google.prot" +
+      "obuf.Empty\"\000\022:\n\010Rollback\022\024.rpc.RollbackR" +
+      "equest\032\026.google.protobuf.Empty\"\000B\026\n\nsamp" +
+      "le.rpcB\006SampleP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -145,68 +167,86 @@ public final class Sample {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_rpc_CreateUserOnCassandraResponse_descriptor,
         new java.lang.String[] { });
-    internal_static_rpc_GetUserRequest_descriptor =
+    internal_static_rpc_Post_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static_rpc_Post_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_rpc_Post_descriptor,
+        new java.lang.String[] { "PostId", "UserId", "Content", });
+    internal_static_rpc_GetUserRequest_descriptor =
+      getDescriptor().getMessageTypes().get(3);
     internal_static_rpc_GetUserRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_rpc_GetUserRequest_descriptor,
         new java.lang.String[] { "UserId", });
     internal_static_rpc_GetUserResponse_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_rpc_GetUserResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_rpc_GetUserResponse_descriptor,
         new java.lang.String[] { "UserId", "Name", "Password", });
     internal_static_rpc_CreatePostRequest_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_rpc_CreatePostRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_rpc_CreatePostRequest_descriptor,
         new java.lang.String[] { "PostId", "UserId", "Content", });
     internal_static_rpc_CreatePostResponse_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_rpc_CreatePostResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_rpc_CreatePostResponse_descriptor,
         new java.lang.String[] { });
     internal_static_rpc_GetPostRequest_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_rpc_GetPostRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_rpc_GetPostRequest_descriptor,
         new java.lang.String[] { "PostId", });
     internal_static_rpc_GetPostResponse_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_rpc_GetPostResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_rpc_GetPostResponse_descriptor,
         new java.lang.String[] { "PostId", "UserId", "Content", });
+    internal_static_rpc_GetAllPostsRequest_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_rpc_GetAllPostsRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_rpc_GetAllPostsRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_rpc_GetAllPostsResponse_descriptor =
+      getDescriptor().getMessageTypes().get(10);
+    internal_static_rpc_GetAllPostsResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_rpc_GetAllPostsResponse_descriptor,
+        new java.lang.String[] { "Posts", });
     internal_static_rpc_CreateUserOnMysqlRequest_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_rpc_CreateUserOnMysqlRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_rpc_CreateUserOnMysqlRequest_descriptor,
         new java.lang.String[] { "UserId", "Name", "Password", "TransactionId", });
     internal_static_rpc_PrepareRequest_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_rpc_PrepareRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_rpc_PrepareRequest_descriptor,
         new java.lang.String[] { "TransactionId", });
     internal_static_rpc_ValidateRequest_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_rpc_ValidateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_rpc_ValidateRequest_descriptor,
         new java.lang.String[] { "TransactionId", });
     internal_static_rpc_CommitRequest_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_rpc_CommitRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_rpc_CommitRequest_descriptor,
         new java.lang.String[] { "TransactionId", });
     internal_static_rpc_RollbackRequest_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_rpc_RollbackRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_rpc_RollbackRequest_descriptor,
