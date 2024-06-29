@@ -57,6 +57,8 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
     R apply(T t) throws TransactionException;
   }
 
+  private Latest latest = new Latest();
+
   public Cassandra(String configFile) throws TransactionException, IOException {
     // Initialize the transaction manager
     TransactionFactory factory = TransactionFactory.create(configFile);
@@ -115,8 +117,9 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
     execOperationsAsCoordinator(
         "createUser",
         transaction -> {
-          User.put(transaction, request.getUserId(), request.getName(), request.getPassword());
-          callCreateUserEndpoint(request.getUserId(), request.getName(), request.getPassword(), transaction.getId());
+          User.put(transaction, latest.userId, request.getName(), request.getPassword());
+          callCreateUserEndpoint(latest.userId, request.getName(), request.getPassword(), transaction.getId());
+          latest.userId++;
           return CreateUserOnCassandraResponse.newBuilder().build();
         }, responseObserver);
   }
@@ -153,7 +156,8 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
     //This function processing operations can be used in nomal transactions
     //interface transactions.
     TransactionFunction<TransactionCrudOperable, CreatePostResponse> operations = transaction -> {
-      Post.put(transaction, request.getPostId(), request.getUserId(), request.getContent());
+      Post.put(transaction, latest.postId, request.getUserId(), request.getContent());
+      latest.postId++;
       return CreatePostResponse.newBuilder().build();
     };
     execOperations(funcName, operations, responseObserver);

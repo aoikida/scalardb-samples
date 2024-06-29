@@ -247,7 +247,7 @@ The following sections describe how to execute transactions and retrieve data in
 Create user information on MySQL and Cassandra by running the following command:
 
 ```console
-./gradlew :client:run --args="CreateUser 4 Kida password"
+./gradlew :client:run --args="CreateUser Kida password"
 ```
 
 *This command needs distributed transaction*
@@ -277,11 +277,11 @@ You should see the following output:
 Create Post by running the following command:
 
 ```console
-./gradlew :client:run --args="CreatePostOnMysql 4 4 MySQL,Konnichiwa! "
+./gradlew :client:run --args="CreatePostOnMysql 4 MySQL,Konnichiwa! "
 ```
 
 ```console
-./gradlew :client:run --args="CreatePostOnCassandra 4 4 Cassandra,Konnichiwa! "
+./gradlew :client:run --args="CreatePostOnCassandra 4 Cassandra,Konnichiwa! "
 ```
 
 ### Get Post

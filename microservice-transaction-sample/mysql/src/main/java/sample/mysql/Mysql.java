@@ -57,6 +57,8 @@ public class Mysql extends MysqlGrpc.MysqlImplBase implements Closeable {
     R apply(T t) throws TransactionException;
   }
 
+  private Latest latest = new Latest();
+
   public Mysql(String configFile) throws TransactionException, IOException{
     // Initialize the transaction managers
     TransactionFactory factory = TransactionFactory.create(configFile);
@@ -111,7 +113,9 @@ public class Mysql extends MysqlGrpc.MysqlImplBase implements Closeable {
   public void createUserOnMysql (CreateUserOnMysqlRequest request, StreamObserver<Empty> responseObserver) {
     execOperationsAsParticipant("CreateUserOnMysql", request.getTransactionId(),
     transaction -> {
-      User.put(transaction, request.getUserId(), request.getName(), request.getPassword());
+      User.put(transaction, latest.userId, request.getName(), request.getPassword());
+      latest.userId++;
+
       return Empty.getDefaultInstance();
     }, responseObserver);
   }
@@ -148,7 +152,8 @@ public class Mysql extends MysqlGrpc.MysqlImplBase implements Closeable {
     //This function processing operations can be used in nomal transactions
     //interface transactions.
     TransactionFunction<TransactionCrudOperable, CreatePostResponse> operations = transaction -> {
-      Post.put(transaction, request.getPostId(), request.getUserId(), request.getContent());
+      Post.put(transaction, latest.postId, request.getUserId(), request.getContent());
+      latest.postId++;
       return CreatePostResponse.newBuilder().build();
     };
     execOperations(funcName, operations, responseObserver);
