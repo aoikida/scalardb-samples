@@ -61,8 +61,6 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
     R apply(T t) throws TransactionException;
   }
 
-  private Latest latest = new Latest();
-
   public Cassandra(String configFile) throws TransactionException, IOException {
     // Initialize the transaction manager
     TransactionFactory factory = TransactionFactory.create(configFile);
@@ -81,12 +79,12 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
     DistributedTransaction transaction = null;
     try {
       transaction = transactionManager.start();
-      loadUserIfNotExists(transaction, 1, "A", "a");
-      loadUserIfNotExists(transaction, 2, "B", "b");
-      loadUserIfNotExists(transaction, 3, "C", "c");
-      loadPostIfNotExists(transaction, 1, 1, "Cassandra,Aloha!");
-      loadPostIfNotExists(transaction, 2, 2, "Cassandra,Bonjour!");
-      loadPostIfNotExists(transaction, 3, 3, "Casasndra,Ciao!");
+      loadUserIfNotExists(transaction, NextId.userId, "Andy", "passwordandy");
+      loadUserIfNotExists(transaction, NextId.userId, "Bill", "passwordbill");
+      loadUserIfNotExists(transaction, NextId.userId, "Carlie", "passwordcarlie");
+      loadPostIfNotExists(transaction, NextId.postId, 1, "Cassandra,Aloha!");
+      loadPostIfNotExists(transaction, NextId.postId, 2, "Cassandra,Bonjour!");
+      loadPostIfNotExists(transaction, NextId.postId, 3, "Casasndra,Ciao!");
       transaction.commit();
     } catch (TransactionException e) {
       logger.error("Loading initial data failed", e);
@@ -100,6 +98,7 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
     Optional<User> user = User.get(transaction, userId);
     if (!user.isPresent()) {
       User.put(transaction, userId, name, password);
+      NextId.userId++;
     }
   }
 
@@ -109,6 +108,7 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
     Optional<Post> post = Post.get(transaction, postId);
     if (!post.isPresent()) {
       Post.put(transaction, postId, userId, content);
+      NextId.postId++;
     }
   }
 
@@ -121,9 +121,9 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
     execOperationsAsCoordinator(
         "createUser",
         transaction -> {
-          User.put(transaction, latest.userId, request.getName(), request.getPassword());
-          callCreateUserEndpoint(latest.userId, request.getName(), request.getPassword(), transaction.getId());
-          latest.userId++;
+          User.put(transaction, NextId.userId, request.getName(), request.getPassword());
+          callCreateUserEndpoint(NextId.userId, request.getName(), request.getPassword(), transaction.getId());
+          NextId.userId++;
           return CreateUserOnCassandraResponse.newBuilder().build();
         }, responseObserver);
   }
@@ -161,7 +161,7 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
     TransactionFunction<TransactionCrudOperable, GetAllUsersResponse> operations = transaction -> {
       // Get all users
       GetAllUsersResponse.Builder response = GetAllUsersResponse.newBuilder();
-      for (int i = 1; i < latest.userId; i++) {
+      for (int i = 1; i < NextId.userId; i++) {
         Optional<User> user = User.get(transaction, i);
         if (user.isPresent()) {
           response.addUsers(
@@ -183,8 +183,8 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
     //This function processing operations can be used in nomal transactions
     //interface transactions.
     TransactionFunction<TransactionCrudOperable, CreatePostResponse> operations = transaction -> {
-      Post.put(transaction, latest.postId, request.getUserId(), request.getContent());
-      latest.postId++;
+      Post.put(transaction, NextId.postId, request.getUserId(), request.getContent());
+      NextId.postId++;
       return CreatePostResponse.newBuilder().build();
     };
     execOperations(funcName, operations, responseObserver);
@@ -217,7 +217,7 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
     TransactionFunction<TransactionCrudOperable, GetAllPostsResponse> operations = transaction -> {
       // Get all posts
       GetAllPostsResponse.Builder response =GetAllPostsResponse.newBuilder();
-      for (int i = 1; i < latest.postId; i++) {
+      for (int i = 1; i < NextId.postId; i++) {
         Optional<Post> post = Post.get(transaction, i);
         if (post.isPresent()) {
           response.addPosts(

@@ -8,14 +8,11 @@ import com.scalar.db.api.TwoPhaseCommitTransaction;
 import com.scalar.db.api.TwoPhaseCommitTransactionManager;
 import com.scalar.db.exception.transaction.AbortException;
 import com.scalar.db.exception.transaction.CrudException;
-import com.scalar.db.exception.transaction.RollbackException;
 import com.scalar.db.exception.transaction.TransactionException;
 import com.scalar.db.exception.transaction.TransactionNotFoundException;
 import com.scalar.db.service.TransactionFactory;
-import io.grpc.ManagedChannel;
 import io.grpc.Status;
 import io.grpc.StatusRuntimeException;
-import io.grpc.netty.NettyChannelBuilder;
 import io.grpc.stub.StreamObserver;
 import java.io.Closeable;
 import java.io.IOException;
@@ -32,7 +29,6 @@ import sample.mysql.model.User;
 import sample.mysql.model.Post;
 import sample.rpc.CommitRequest;
 import sample.rpc.MysqlGrpc;
-import sample.rpc.CassandraGrpc;
 import sample.rpc.CreateUserOnMysqlRequest;
 import sample.rpc.GetPostRequest;
 import sample.rpc.GetPostResponse;
@@ -61,8 +57,6 @@ public class Mysql extends MysqlGrpc.MysqlImplBase implements Closeable {
     R apply(T t) throws TransactionException;
   }
 
-  private Latest latest = new Latest();
-
   public Mysql(String configFile) throws TransactionException, IOException{
     // Initialize the transaction managers
     TransactionFactory factory = TransactionFactory.create(configFile);
@@ -80,12 +74,12 @@ public class Mysql extends MysqlGrpc.MysqlImplBase implements Closeable {
     DistributedTransaction transaction = null;
     try {
       transaction = transactionManager.start();
-      loadUserIfNotExists(transaction, 1, "A", "a");
-      loadUserIfNotExists(transaction, 2, "B", "b");
-      loadUserIfNotExists(transaction, 3, "C", "c");
-      loadPostIfNotExists(transaction, 1, 1, "MySQL,Aloha!");
-      loadPostIfNotExists(transaction, 2, 2, "MySQL,Bonjour!");
-      loadPostIfNotExists(transaction, 3, 3, "MySQL,Ciao!");
+      loadUserIfNotExists(transaction, NextId.userId, "Andy", "passwordandy");
+      loadUserIfNotExists(transaction, NextId.userId, "Bill", "passwordbill");
+      loadUserIfNotExists(transaction, NextId.userId, "Carlie", "passwordcarlie");
+      loadPostIfNotExists(transaction, NextId.postId, 1, "MySQL,Aloha!");
+      loadPostIfNotExists(transaction, NextId.postId, 2, "MySQL,Bonjour!");
+      loadPostIfNotExists(transaction, NextId.postId, 3, "MySQL,Ciao!");
       transaction.commit();
     } catch (TransactionException e) {
       logger.error("Loading initial data failed", e);
@@ -100,6 +94,7 @@ public class Mysql extends MysqlGrpc.MysqlImplBase implements Closeable {
     Optional<User> user = User.get(transaction, userId);
     if (!user.isPresent()) {
       User.put(transaction, userId, name, password);
+      NextId.userId++;
     }
   }
 
@@ -109,6 +104,7 @@ public class Mysql extends MysqlGrpc.MysqlImplBase implements Closeable {
     Optional<Post> post = Post.get(transaction, postId);
     if (!post.isPresent()) {
       Post.put(transaction, postId, userId, content);
+      NextId.postId++;
     }
   }
 
@@ -117,8 +113,8 @@ public class Mysql extends MysqlGrpc.MysqlImplBase implements Closeable {
   public void createUserOnMysql (CreateUserOnMysqlRequest request, StreamObserver<Empty> responseObserver) {
     execOperationsAsParticipant("CreateUserOnMysql", request.getTransactionId(),
     transaction -> {
-      User.put(transaction, latest.userId, request.getName(), request.getPassword());
-      latest.userId++;
+      User.put(transaction, NextId.userId, request.getName(), request.getPassword());
+      NextId.userId++;
 
       return Empty.getDefaultInstance();
     }, responseObserver);
@@ -158,7 +154,7 @@ public class Mysql extends MysqlGrpc.MysqlImplBase implements Closeable {
     TransactionFunction<TransactionCrudOperable, GetAllUsersResponse> operations = transaction -> {
       // Get all users
       GetAllUsersResponse.Builder response = GetAllUsersResponse.newBuilder();
-      for (int i = 1; i < latest.userId; i++) {
+      for (int i = 1; i < NextId.userId; i++) {
         Optional<User> user = User.get(transaction, i);
         if (user.isPresent()) {
           response.addUsers(
@@ -180,8 +176,8 @@ public class Mysql extends MysqlGrpc.MysqlImplBase implements Closeable {
     //This function processing operations can be used in nomal transactions
     //interface transactions.
     TransactionFunction<TransactionCrudOperable, CreatePostResponse> operations = transaction -> {
-      Post.put(transaction, latest.postId, request.getUserId(), request.getContent());
-      latest.postId++;
+      Post.put(transaction, NextId.postId, request.getUserId(), request.getContent());
+      NextId.postId++;
       return CreatePostResponse.newBuilder().build();
     };
     execOperations(funcName, operations, responseObserver);
@@ -214,7 +210,7 @@ public class Mysql extends MysqlGrpc.MysqlImplBase implements Closeable {
     TransactionFunction<TransactionCrudOperable, GetAllPostsResponse> operations = transaction -> {
       // Get all posts
       GetAllPostsResponse.Builder response = GetAllPostsResponse.newBuilder();
-      for (int i = 1; i < latest.postId; i++) {
+      for (int i = 1; i < NextId.postId; i++) {
         Optional<Post> post = Post.get(transaction, i);
         if (post.isPresent()) {
           response.addPosts(

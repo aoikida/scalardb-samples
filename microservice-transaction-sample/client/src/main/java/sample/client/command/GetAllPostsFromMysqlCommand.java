@@ -3,7 +3,6 @@ package sample.client.command;
 import io.grpc.ManagedChannel;
 import java.util.concurrent.Callable;
 import picocli.CommandLine.Command;
-import picocli.CommandLine.Parameters;
 import sample.rpc.MysqlGrpc;
 import sample.rpc.GetAllPostsRequest;
 import sample.rpc.GetAllPostsResponse;
@@ -18,7 +17,7 @@ public class GetAllPostsFromMysqlCommand implements Callable<Integer> {
     ManagedChannel channel = Utils.getMysqlChannel();
     try {
       MysqlGrpc.MysqlBlockingStub stub = MysqlGrpc.newBlockingStub(channel);
-      Iterator<sample.rpc.GetAllPostsResponse> response =
+      Iterator<GetAllPostsResponse> response =
           stub.getAllPosts(GetAllPostsRequest.newBuilder().build());
         while (response.hasNext()) {
           Utils.printJsonString(response.next());

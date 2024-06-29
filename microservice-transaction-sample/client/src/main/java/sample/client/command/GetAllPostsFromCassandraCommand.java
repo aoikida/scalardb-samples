@@ -3,7 +3,6 @@ package sample.client.command;
 import io.grpc.ManagedChannel;
 import java.util.concurrent.Callable;
 import picocli.CommandLine.Command;
-import picocli.CommandLine.Parameters;
 import sample.rpc.CassandraGrpc;
 import sample.rpc.GetAllPostsRequest;
 import sample.rpc.GetAllPostsResponse;
@@ -18,7 +17,7 @@ public class GetAllPostsFromCassandraCommand implements Callable<Integer> {
     ManagedChannel channel = Utils.getCassandraChannel();
     try {
       CassandraGrpc.CassandraBlockingStub stub = CassandraGrpc.newBlockingStub(channel);
-      Iterator<sample.rpc.GetAllPostsResponse> response =
+      Iterator<GetAllPostsResponse> response =
           stub.getAllPosts(GetAllPostsRequest.newBuilder().build());
         while (response.hasNext()) {
           Utils.printJsonString(response.next());

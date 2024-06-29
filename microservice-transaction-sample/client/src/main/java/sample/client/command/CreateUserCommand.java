@@ -23,14 +23,12 @@ public class CreateUserCommand implements Callable<Integer> {
   public Integer call() {
     ManagedChannel channel = Utils.getCassandraChannel();
     try {
-      CassandraGrpc.CassandraBlockingStub stub = CassandraGrpc.newBlockingStub(channel);
-      System.out.println("CreateUserCommand.call() name=" + name + " password=" + password + "channel=" + channel);
+      CassandraGrpc.CassandraBlockingStub stub = CassandraGrpc.newBlockingStub(channel);;
       CreateUserOnCassandraResponse response  = stub.createUserOnCassandra(
           CreateUserOnCassandraRequest.newBuilder()
               .setName(name)
               .setPassword(password)
               .build());
-
       Utils.printJsonString(response);
       return 0;
     } catch (Exception e) {
