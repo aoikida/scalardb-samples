@@ -1,10 +1,22 @@
+"use client";
+
 import type { NextPage } from "next";
 import Head from "next/head";
 import { AddPostButton } from "./_components/add-post-button";
+import { useState } from "react";
+import { AddPostDialog } from "./_components/add-post-dialog";
 
 const Home: NextPage = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-green-400 flex flex-col items-center">
+      {/* TODO: サーバー名は動的に変更する */}
+      <AddPostDialog
+        onClose={() => setIsOpen(false)}
+        server="サーバー A"
+        isOpen={isOpen}
+      />
       <Head>
         <title>サーバー A</title>
       </Head>
@@ -27,7 +39,7 @@ const Home: NextPage = () => {
           </div>
         </div>
       </main>
-      <AddPostButton />
+      <AddPostButton onClick={() => setIsOpen(true)} />
     </div>
   );
 };
