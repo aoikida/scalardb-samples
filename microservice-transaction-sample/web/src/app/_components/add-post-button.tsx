@@ -1,9 +1,14 @@
 "use client";
 
+import { FC } from "react";
 import { IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
-export const AddPostButton = () => {
+type Props = {
+  onClick: () => void;
+};
+
+export const AddPostButton: FC<Props> = ({ onClick }) => {
   // Implement the create post button
   return (
     <IconButton
@@ -16,5 +21,3 @@ export const AddPostButton = () => {
     </IconButton>
   );
 };
-
-const onClick = () => {};
