@@ -1,6 +1,6 @@
 import { $ } from "zx";
-import { UserResponse } from "./authenticationUtil";
-import { extractResponseFromStdout } from "./extractResponse";
+import { UserResponse } from "./authentication-util";
+import { extractResponseFromStdout } from "./extract-response";
 
 export const getUser = async (userId: number): Promise<UserResponse> => {
   const exec =
