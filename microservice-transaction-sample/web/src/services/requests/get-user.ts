@@ -1,3 +1,5 @@
+"use server";
+
 import { $ } from "zx";
 import { UserResponse } from "./authentication-util";
 import { extractResponseFromStdout } from "./extract-response";

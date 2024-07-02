@@ -1,17 +1,19 @@
+"use server";
+
 import { $ } from "zx";
 import { getUserId } from "./authentication-util";
 
 export const createPost = async (
   message: string,
-  serverId: number
+  serverName: string
 ): Promise<void> => {
   const userId = await getUserId();
   let commandName = "";
-  switch (serverId) {
-    case 1:
+  switch (serverName) {
+    case "サーバー A":
       commandName = "CreatePostOnMysql";
       break;
-    case 2:
+    case "サーバー B":
       commandName = "CreatePostOnCassandra";
   }
   const exec =

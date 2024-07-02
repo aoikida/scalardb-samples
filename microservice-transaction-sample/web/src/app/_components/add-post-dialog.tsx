@@ -15,6 +15,7 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import { Post } from "@/services/schema/types";
 import { PostSchema } from "@/services/schema";
+import { createPost } from "@/services/requests/create-post";
 
 type Props = {
   onClose: () => void;
@@ -33,6 +34,7 @@ export const AddPostDialog: FC<Props> = ({ onClose, server, isOpen }) => {
   const onSubmit = async (data: Post) => {
     try {
       // ここでデータ送信のロジックを実装します
+      await createPost(data.message, data.server);
       console.log(data); // 仮のログ出力
       toast({
         title: "Success",

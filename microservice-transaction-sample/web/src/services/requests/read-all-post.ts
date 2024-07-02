@@ -1,3 +1,5 @@
+"use server";
+
 import { $ } from "zx";
 
 // export const readAllPost = async (serverId: number): Promise<string> => {
