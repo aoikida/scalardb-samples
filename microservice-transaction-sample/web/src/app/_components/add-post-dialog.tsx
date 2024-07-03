@@ -40,6 +40,8 @@ export const AddPostDialog: FC<Props> = ({ onClose, server, isOpen }) => {
         title: "Success",
         description: "Your post has been added.",
       });
+      form.reset();
+      onClose();
     } catch (error: any) {
       toast({
         title: "Error",

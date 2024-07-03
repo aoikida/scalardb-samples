@@ -14,37 +14,38 @@ const Home: NextPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [posts, setPosts] = useState<Post[]>([]);
   const [serverName, setServerName] = useState("サーバー A");
+  const [refreshPosts, setRefreshPosts] = useState<Date>();
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    new Promise(async () => {
+      console.log("fetching posts");
       const response = await getAllPost(serverName);
 
       const posts = await Promise.all(
         response.posts.map(async (post) => {
           const { post_id: postId, content, user_id: userId } = post;
-          const { name: userName } = await getUser(userId);
+          // const { name: userName } = await getUser(userId);
           // console.log({ userName, postId });
           return {
             id: postId,
             content,
-            userName,
+            userName: "test",
             serverName,
           };
         })
       );
       setPosts(posts);
-    };
-
-    new Promise(() => {
-      fetchPosts();
     });
-  }, [serverName]);
+  }, [serverName, refreshPosts]);
 
   return (
     <div className="min-h-screen bg-green-400 flex flex-col items-center">
       {/* TODO: サーバー名は動的に変更する */}
       <AddPostDialog
-        onClose={() => setIsOpen(false)}
+        onClose={() => {
+          setIsOpen(false);
+          setRefreshPosts(new Date());
+        }}
         server={serverName}
         isOpen={isOpen}
       />

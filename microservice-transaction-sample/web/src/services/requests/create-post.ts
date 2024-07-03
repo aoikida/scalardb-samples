@@ -16,8 +16,9 @@ export const createPost = async (
     case "サーバー B":
       commandName = "CreatePostOnCassandra";
   }
+
   const exec =
-    await $`cd ..; ./gradlew :client:run --args=\"${commandName} ${userId} ${message}\"; cd -`;
+    await $`cd ..; ./gradlew :client:run --args=\"${commandName} ${userId} ${message}\"`;
   if (exec.exitCode !== 0) {
     throw new Error(exec.stderr);
   }
