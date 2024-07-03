@@ -1,13 +1,18 @@
 export class Post {
   id: number;
   userName: string;
-  message: string;
-  serverId: number;
+  content: string;
+  serverName: string;
 
-  constructor(id: number, userName: string, message: string, serverId: number) {
+  constructor(
+    id: number,
+    userName: string,
+    content: string,
+    serverName: string
+  ) {
     this.id = id;
     this.userName = userName;
-    this.message = message;
-    this.serverId = serverId;
+    this.content = content;
+    this.serverName = serverName;
   }
 }

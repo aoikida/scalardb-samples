@@ -17,7 +17,7 @@ export const createPost = async (
       commandName = "CreatePostOnCassandra";
   }
   const exec =
-    await $`cd ..; ./gradlew :client:run --args="${commandName} ${userId} ${message}"`;
+    await $`cd ..; ./gradlew :client:run --args=\"${commandName} ${userId} ${message}\"; cd -`;
   if (exec.exitCode !== 0) {
     throw new Error(exec.stderr);
   }

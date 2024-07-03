@@ -12,7 +12,7 @@ export interface UserResponse {
 }
 
 export interface PostResponse {
-  id: number;
+  post_id: number;
   user_id: number;
-  message: string;
+  content: string;
 }

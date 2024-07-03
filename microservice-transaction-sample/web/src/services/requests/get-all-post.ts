@@ -6,7 +6,7 @@ import { extractResponseFromStdout } from "./extract-response";
 
 export const getAllPost = async (
   serverName: string
-): Promise<PostResponse[]> => {
+): Promise<{ posts: PostResponse[] }> => {
   let commandName = "";
   switch (serverName) {
     case "サーバー A":
@@ -16,6 +16,5 @@ export const getAllPost = async (
       commandName = "GetAllPostsFromCassandra";
   }
   const exec = await $`cd ..; ./gradlew :client:run --args="${commandName}"`;
-  const posts = extractResponseFromStdout<PostResponse[]>(exec.stdout);
-  return posts;
+  return extractResponseFromStdout<{ posts: PostResponse[] }>(exec.stdout);
 };

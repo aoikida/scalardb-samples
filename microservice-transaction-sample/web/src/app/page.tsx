@@ -3,41 +3,61 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { AddPostButton } from "./_components/add-post-button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AddPostDialog } from "./_components/add-post-dialog";
+import { Post } from "./_models/post";
+import { PostCard } from "./_components/post-card";
+import { getAllPost } from "@/services/requests/get-all-post";
+import { getUser } from "@/services/requests/get-user";
 
 const Home: NextPage = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [serverName, setServerName] = useState("サーバー A");
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await getAllPost(serverName);
+
+      const posts = await Promise.all(
+        response.posts.map(async (post) => {
+          const { post_id: postId, content, user_id: userId } = post;
+          const { name: userName } = await getUser(userId);
+          // console.log({ userName, postId });
+          return {
+            id: postId,
+            content,
+            userName,
+            serverName,
+          };
+        })
+      );
+      setPosts(posts);
+    };
+
+    new Promise(() => {
+      fetchPosts();
+    });
+  }, [serverName]);
 
   return (
     <div className="min-h-screen bg-green-400 flex flex-col items-center">
       {/* TODO: サーバー名は動的に変更する */}
       <AddPostDialog
         onClose={() => setIsOpen(false)}
-        server="サーバー A"
+        server={serverName}
         isOpen={isOpen}
       />
       <Head>
-        <title>サーバー A</title>
+        <title>{serverName}</title>
       </Head>
       <header className="w-full bg-green-500 text-white text-center py-4 text-2xl font-bold fixed top-0">
-        サーバー A
+        {serverName}
       </header>
       <main className="flex flex-col items-center justify-center mt-20 w-full">
-        <div className="bg-white p-4 rounded-md shadow-md w-1/2 mb-4">
-          <div className="font-bold">山田太郎</div>
-          <div className="mt-2">
-            新しいカフェを見つけました。コーヒーが美味しくて、店内も落ち着いた雰囲気。ここで勉強するのが楽しみです！☕📚
-            #カフェ巡り #新しいお気に入り
-          </div>
-        </div>
-        <div className="bg-white p-4 rounded-md shadow-md w-1/2">
-          <div className="font-bold">山田太郎</div>
-          <div className="mt-2">
-            新しいカフェを見つけました。コーヒーが美味しくて、店内も落ち着いた雰囲気。ここで勉強するのが楽しみです！☕📚
-            #カフェ巡り #新しいお気に入り
-          </div>
-        </div>
+        {posts.map((post) => (
+          <PostCard key={post.id} post={post}></PostCard>
+        ))}
       </main>
       <AddPostButton onClick={() => setIsOpen(true)} />
     </div>
