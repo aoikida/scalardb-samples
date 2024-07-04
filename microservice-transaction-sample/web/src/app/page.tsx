@@ -14,14 +14,14 @@ const Home: NextPage = () => {
       {/* TODO: サーバー名は動的に変更する */}
       <AddPostDialog
         onClose={() => setIsOpen(false)}
-        server="サーバー A"
+        server="サーバーA"
         isOpen={isOpen}
       />
       <Head>
-        <title>サーバー A</title>
+        <title>投稿一覧</title>
       </Head>
       <header className="w-full bg-green-500 text-white text-center py-4 text-2xl font-bold fixed top-0">
-        サーバー A
+        サーバーA
       </header>
       <main className="flex flex-col items-center justify-center mt-20 w-full">
         <div className="bg-white p-4 rounded-md shadow-md w-1/2 mb-4">
