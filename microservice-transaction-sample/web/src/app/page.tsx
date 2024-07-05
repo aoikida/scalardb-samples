@@ -23,13 +23,16 @@ const Home: NextPage = () => {
 
       const posts = await Promise.all(
         response.posts.map(async (post) => {
-          const { post_id: postId, content, user_id: userId } = post;
-          // const { name: userName } = await getUser(userId);
-          // console.log({ userName, postId });
+          const {
+            post_id: postId,
+            content,
+            user_id: userId,
+            name: userName,
+          } = post;
           return {
             id: postId,
             content,
-            userName: "test",
+            userName,
             serverName,
           };
         })
@@ -42,18 +45,15 @@ const Home: NextPage = () => {
     <div className="min-h-screen bg-green-400 flex flex-col items-center">
       {/* TODO: サーバー名は動的に変更する */}
       <AddPostDialog
-        onClose={() => {
-          setIsOpen(false);
-          setRefreshPosts(new Date());
-        }}
-        server={serverName}
+        onClose={() => setIsOpen(false)}
+        server="サーバーA"
         isOpen={isOpen}
       />
       <Head>
-        <title>{serverName}</title>
+        <title>投稿一覧</title>
       </Head>
       <header className="w-full bg-green-500 text-white text-center py-4 text-2xl font-bold fixed top-0">
-        {serverName}
+        サーバーA
       </header>
       <main className="flex flex-col items-center justify-center mt-20 w-full">
         {posts.map((post) => (

@@ -190,12 +190,14 @@ public class Mysql extends MysqlGrpc.MysqlImplBase implements Closeable {
     //interface transactions.
     TransactionFunction<TransactionCrudOperable, GetPostResponse> operations = transaction -> {
       Optional<Post> post = Post.get(transaction, request.getPostId());
+      Optional<User> user = User.get(transaction, post.get().userId);
       if (!post.isPresent()) {
         throw Status.NOT_FOUND.withDescription("Post not found").asRuntimeException();
       }
       return GetPostResponse.newBuilder()
           .setPostId(post.get().postId)
           .setUserId(post.get().userId)
+          .setName(user.get().name)
           .setContent(post.get().content)
           .build();
     };
@@ -212,11 +214,13 @@ public class Mysql extends MysqlGrpc.MysqlImplBase implements Closeable {
       GetAllPostsResponse.Builder response = GetAllPostsResponse.newBuilder();
       for (int i = 1; i < NextId.postId; i++) {
         Optional<Post> post = Post.get(transaction, i);
+        Optional<User> user = User.get(transaction, post.get().userId);
         if (post.isPresent()) {
           response.addPosts(
             sample.rpc.Post.newBuilder()
                   .setPostId(post.get().postId)
                   .setUserId(post.get().userId)
+                  .setName(user.get().name)
                   .setContent(post.get().content)
                   .build());
         }

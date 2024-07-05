@@ -27,15 +27,22 @@ export const AddPostDialog: FC<Props> = ({ onClose, server, isOpen }) => {
   const form = useForm<Post>({
     resolver: zodResolver(PostSchema),
     defaultValues: {
+      userId: 1,
       server,
     },
   });
 
-  const onSubmit = async (data: Post) => {
+  const { getValues } = form;
+
+  const onSubmit = async () => {
+    const data = getValues();
+    const userId = data.userId;
+    const message = data.message;
+    const server = data.server;
+    const formData = { userId, message, server };
+
     try {
-      // ここでデータ送信のロジックを実装します
-      await createPost(data.message, data.server);
-      console.log(data); // 仮のログ出力
+      await createPost(message, server);
       toast({
         title: "Success",
         description: "Your post has been added.",
@@ -48,6 +55,10 @@ export const AddPostDialog: FC<Props> = ({ onClose, server, isOpen }) => {
         description: error.message || "An error occurred",
       });
     }
+  };
+
+  const onSubmitError = (error: any) => {
+    console.error(error);
   };
 
   if (!isOpen) return null;
@@ -77,7 +88,7 @@ export const AddPostDialog: FC<Props> = ({ onClose, server, isOpen }) => {
             </div>
             <Form {...form}>
               <form
-                onSubmit={form.handleSubmit(onSubmit)}
+                onSubmit={form.handleSubmit(onSubmit, onSubmitError)}
                 className="w-full px-4 pb-4 pt-4 lg:px-8 lg:pb-6 lg:pt-6"
               >
                 <FormField
@@ -97,6 +108,9 @@ export const AddPostDialog: FC<Props> = ({ onClose, server, isOpen }) => {
                     </FormItem>
                   )}
                 />
+                <p className="mt-2 text-red-400">
+                  {form.formState.errors.message?.message}
+                </p>
                 <Button type="submit" className="mt-4">
                   Submit
                 </Button>

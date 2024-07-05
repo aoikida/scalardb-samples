@@ -57,13 +57,13 @@ The following sections describe how to set up the sample application that suppor
 Open **Terminal**, then clone the ScalarDB samples repository by running the following command:
 
 ```console
-$ git clone https://github.com/scalar-labs/scalardb-samples
+git clone https://github.com/scalar-labs/scalardb-samples
 ```
 
 Then, go to the directory that contains the sample application by running the following command:
 
 ```console
-$ cd scalardb-samples/microservice-transaction-sample
+cd scalardb-samples/microservice-transaction-sample
 ```
 
 ### Start Cassandra and MySQL
@@ -208,14 +208,10 @@ Create user information on MySQL and Cassandra by running the following command:
 
 ### Get user information for login
 
-Start with getting information about the customer whose ID is `4` by running the following command:
+Start with getting information about the user whose ID is `4` from MySQL by running the following command:
 
 ```console
 ./gradlew :client:run --args="GetUserFromMysql 4"
-```
-
-```console
-./gradlew :client:run --args="GetUserFromCassandra 4"
 ```
 
 You should see the following output:
@@ -228,11 +224,20 @@ You should see the following output:
 
 ### Get all users
 
-Get all users by running the following command:
+Get all users from MySQL by running the following command:
 ```console
 ./gradlew :client:run --args="GetAllUsersFromMysql"
 ```
 
+You should see the following output:
+
+```console
+...
+{"users": [{"user_id": 1,"name": "Andy","password": "passwordandy"},{"user_id": 2,"name": "Bill","password": "passwordbill"},{"user_id": 3,"name": "Carlie","password": "passwordcarlie"},{"user_id": 4,"name": "Kida","password": "password"}]}
+...
+```
+
+Get all users from Cassandra by running the following command:
 ```console
 ./gradlew :client:run --args="GetAllUsersFromCassandra"
 ```
@@ -244,6 +249,8 @@ You should see the following output:
 {"users": [{"user_id": 1,"name": "Andy","password": "passwordandy"},{"user_id": 2,"name": "Bill","password": "passwordbill"},{"user_id": 3,"name": "Carlie","password": "passwordcarlie"},{"user_id": 4,"name": "Kida","password": "password"}]}
 ...
 ```
+
+You will see the same output from MySQL and Cassandra.
 
 ### Create post
 
@@ -259,15 +266,12 @@ Create Post by running the following command:
 
 ### Get Post
 
-Get Post by running the following command:
+Get post from MySQL by running the following command:
 
 ```console
 ./gradlew :client:run --args="GetPostFromMysql 4"
 ```
-
-```console
-./gradlew :client:run --args="GetPostFromCassandra 4"
-```
+You should see the following output:
 
 ```console
 ...
@@ -275,22 +279,42 @@ Get Post by running the following command:
 ...
 ```
 
-### Get all posts
-
-Get all posts by running the following command:
-```console
-./gradlew :client:run --args="GetAllPostsFromMysql"
-```
+Get post from Cassandra by running the following command:
 
 ```console
-./gradlew :client:run --args="GetAllPostsFromCassandra"
+./gradlew :client:run --args="GetPostFromCassandra 4"
 ```
-
 You should see the following output:
 
 ```console
 ...
-{"posts": [{"post_id": 1,"user_id": 1,"content": "MySQL,Aloha!"},{"post_id": 2,"user_id": 2,"content": "MySQL,Bonjour!"},{"post_id": 3,"user_id": 3,"content": "MySQL,Ciao!"},{"post_id": 4,"user_id": 4,"content": "MySQL,Konnichiwa!"}]}
+{"post_id": 4,"user_id": 4,"name": "Kida","content": "Cassandra,Konnichiwa!"}
+...
+```
+
+### Get all posts
+
+Get all posts from MySQL by running the following command:
+```console
+./gradlew :client:run --args="GetAllPostsFromMysql"
+```
+You should see the following output:
+
+```console
+...
+{"posts": [{"post_id": 1,"user_id": 1,"name": "Andy","content": "MySQL,Aloha!"},{"post_id": 2,"user_id": 2,"name": "Bill","content": "MySQL,Bonjour!"},{"post_id": 3,"user_id": 3,"name": "Carlie","content": "MySQL,Ciao!"},{"post_id": 4,"user_id": 4,"name": "Kida","content": "MySQL,Konnichiwa!"}]}
+...
+```
+
+Get all posts from Cassandra by running the following command:
+```console
+./gradlew :client:run --args="GetAllPostsFromCassandra"
+```
+You should see the following output:
+
+```console
+...
+{"posts": [{"post_id": 1,"user_id": 1,"name": "Andy","content": "Cassandra,Aloha!"},{"post_id": 2,"user_id": 2,"name": "Bill","content": "Cassandra,Bonjour!"},{"post_id": 3,"user_id": 3,"name": "Carlie","content": "Casasndra,Ciao!"},{"post_id": 4,"user_id": 4,"name": "Kida","content": "Cassandra,Konnichiwa!"}]}
 ...
 ```
 

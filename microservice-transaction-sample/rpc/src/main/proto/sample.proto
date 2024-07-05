@@ -44,7 +44,8 @@ message CreateUserOnCassandraResponse {
 message Post {
   int32 post_id = 1;
   int32 user_id = 2;
-  string content = 3;
+  string name = 3;
+  string content = 4;
 }
 
 message User {
@@ -80,7 +81,8 @@ message GetPostRequest {
 message GetPostResponse {
   int32 post_id = 1;
   int32 user_id = 2;
-  string content = 3;
+  string name = 3;
+  string content = 4;
 }
 
 message GetAllPostsRequest {
