@@ -20,12 +20,24 @@ public interface PostOrBuilder extends
   int getUserId();
 
   /**
-   * <code>string content = 3;</code>
+   * <code>string name = 3;</code>
+   * @return The name.
+   */
+  java.lang.String getName();
+  /**
+   * <code>string name = 3;</code>
+   * @return The bytes for name.
+   */
+  com.google.protobuf.ByteString
+      getNameBytes();
+
+  /**
+   * <code>string content = 4;</code>
    * @return The content.
    */
   java.lang.String getContent();
   /**
-   * <code>string content = 3;</code>
+   * <code>string content = 4;</code>
    * @return The bytes for content.
    */
   com.google.protobuf.ByteString

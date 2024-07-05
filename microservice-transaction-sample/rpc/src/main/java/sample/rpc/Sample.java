@@ -122,55 +122,55 @@ public final class Sample {
       "ty.proto\"O\n\034CreateUserOnCassandraRequest" +
       "\022\017\n\007user_id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\020\n\010passw" +
       "ord\030\003 \001(\t\"\037\n\035CreateUserOnCassandraRespon" +
-      "se\"9\n\004Post\022\017\n\007post_id\030\001 \001(\005\022\017\n\007user_id\030\002" +
-      " \001(\005\022\017\n\007content\030\003 \001(\t\"7\n\004User\022\017\n\007user_id" +
-      "\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\020\n\010password\030\003 \001(\t\"!" +
-      "\n\016GetUserRequest\022\017\n\007user_id\030\001 \001(\005\"B\n\017Get" +
-      "UserResponse\022\017\n\007user_id\030\001 \001(\005\022\014\n\004name\030\002 " +
-      "\001(\t\022\020\n\010password\030\003 \001(\t\"F\n\021CreatePostReque" +
-      "st\022\017\n\007post_id\030\001 \001(\005\022\017\n\007user_id\030\002 \001(\005\022\017\n\007" +
-      "content\030\003 \001(\t\"\024\n\022CreatePostResponse\"!\n\016G" +
-      "etPostRequest\022\017\n\007post_id\030\001 \001(\005\"D\n\017GetPos" +
-      "tResponse\022\017\n\007post_id\030\001 \001(\005\022\017\n\007user_id\030\002 " +
-      "\001(\005\022\017\n\007content\030\003 \001(\t\"\024\n\022GetAllPostsReque" +
-      "st\"/\n\023GetAllPostsResponse\022\030\n\005posts\030\001 \003(\013" +
-      "2\t.rpc.Post\"\024\n\022GetAllUsersRequest\"/\n\023Get" +
-      "AllUsersResponse\022\030\n\005users\030\001 \003(\0132\t.rpc.Us" +
-      "er\"c\n\030CreateUserOnMysqlRequest\022\017\n\007user_i" +
-      "d\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\020\n\010password\030\003 \001(\t\022" +
-      "\026\n\016transaction_id\030\004 \001(\t\"(\n\016PrepareReques" +
-      "t\022\026\n\016transaction_id\030\001 \001(\t\")\n\017ValidateReq" +
-      "uest\022\026\n\016transaction_id\030\001 \001(\t\"\'\n\rCommitRe" +
-      "quest\022\026\n\016transaction_id\030\001 \001(\t\")\n\017Rollbac" +
-      "kRequest\022\026\n\016transaction_id\030\001 \001(\t2\252\003\n\tCas" +
-      "sandra\022`\n\025CreateUserOnCassandra\022!.rpc.Cr" +
-      "eateUserOnCassandraRequest\032\".rpc.CreateU" +
-      "serOnCassandraResponse\"\000\0226\n\007GetUser\022\023.rp" +
-      "c.GetUserRequest\032\024.rpc.GetUserResponse\"\000" +
-      "\022?\n\nCreatePost\022\026.rpc.CreatePostRequest\032\027" +
-      ".rpc.CreatePostResponse\"\000\0226\n\007GetPost\022\023.r" +
-      "pc.GetPostRequest\032\024.rpc.GetPostResponse\"" +
-      "\000\022D\n\013GetAllPosts\022\027.rpc.GetAllPostsReques" +
-      "t\032\030.rpc.GetAllPostsResponse\"\0000\001\022D\n\013GetAl" +
-      "lUsers\022\027.rpc.GetAllUsersRequest\032\030.rpc.Ge" +
-      "tAllUsersResponse\"\0000\0012\374\004\n\005Mysql\0226\n\007GetUs" +
-      "er\022\023.rpc.GetUserRequest\032\024.rpc.GetUserRes" +
-      "ponse\"\000\022?\n\nCreatePost\022\026.rpc.CreatePostRe" +
-      "quest\032\027.rpc.CreatePostResponse\"\000\0226\n\007GetP" +
-      "ost\022\023.rpc.GetPostRequest\032\024.rpc.GetPostRe" +
-      "sponse\"\000\022D\n\013GetAllPosts\022\027.rpc.GetAllPost" +
-      "sRequest\032\030.rpc.GetAllPostsResponse\"\0000\001\022D" +
-      "\n\013GetAllUsers\022\027.rpc.GetAllUsersRequest\032\030" +
-      ".rpc.GetAllUsersResponse\"\0000\001\022L\n\021CreateUs" +
-      "erOnMysql\022\035.rpc.CreateUserOnMysqlRequest" +
-      "\032\026.google.protobuf.Empty\"\000\0228\n\007Prepare\022\023." +
-      "rpc.PrepareRequest\032\026.google.protobuf.Emp" +
-      "ty\"\000\022:\n\010Validate\022\024.rpc.ValidateRequest\032\026" +
-      ".google.protobuf.Empty\"\000\0226\n\006Commit\022\022.rpc" +
-      ".CommitRequest\032\026.google.protobuf.Empty\"\000" +
-      "\022:\n\010Rollback\022\024.rpc.RollbackRequest\032\026.goo" +
-      "gle.protobuf.Empty\"\000B\026\n\nsample.rpcB\006Samp" +
-      "leP\001b\006proto3"
+      "se\"G\n\004Post\022\017\n\007post_id\030\001 \001(\005\022\017\n\007user_id\030\002" +
+      " \001(\005\022\014\n\004name\030\003 \001(\t\022\017\n\007content\030\004 \001(\t\"7\n\004U" +
+      "ser\022\017\n\007user_id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\020\n\010pa" +
+      "ssword\030\003 \001(\t\"!\n\016GetUserRequest\022\017\n\007user_i" +
+      "d\030\001 \001(\005\"B\n\017GetUserResponse\022\017\n\007user_id\030\001 " +
+      "\001(\005\022\014\n\004name\030\002 \001(\t\022\020\n\010password\030\003 \001(\t\"F\n\021C" +
+      "reatePostRequest\022\017\n\007post_id\030\001 \001(\005\022\017\n\007use" +
+      "r_id\030\002 \001(\005\022\017\n\007content\030\003 \001(\t\"\024\n\022CreatePos" +
+      "tResponse\"!\n\016GetPostRequest\022\017\n\007post_id\030\001" +
+      " \001(\005\"R\n\017GetPostResponse\022\017\n\007post_id\030\001 \001(\005" +
+      "\022\017\n\007user_id\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\017\n\007conte" +
+      "nt\030\004 \001(\t\"\024\n\022GetAllPostsRequest\"/\n\023GetAll" +
+      "PostsResponse\022\030\n\005posts\030\001 \003(\0132\t.rpc.Post\"" +
+      "\024\n\022GetAllUsersRequest\"/\n\023GetAllUsersResp" +
+      "onse\022\030\n\005users\030\001 \003(\0132\t.rpc.User\"c\n\030Create" +
+      "UserOnMysqlRequest\022\017\n\007user_id\030\001 \001(\005\022\014\n\004n" +
+      "ame\030\002 \001(\t\022\020\n\010password\030\003 \001(\t\022\026\n\016transacti" +
+      "on_id\030\004 \001(\t\"(\n\016PrepareRequest\022\026\n\016transac" +
+      "tion_id\030\001 \001(\t\")\n\017ValidateRequest\022\026\n\016tran" +
+      "saction_id\030\001 \001(\t\"\'\n\rCommitRequest\022\026\n\016tra" +
+      "nsaction_id\030\001 \001(\t\")\n\017RollbackRequest\022\026\n\016" +
+      "transaction_id\030\001 \001(\t2\252\003\n\tCassandra\022`\n\025Cr" +
+      "eateUserOnCassandra\022!.rpc.CreateUserOnCa" +
+      "ssandraRequest\032\".rpc.CreateUserOnCassand" +
+      "raResponse\"\000\0226\n\007GetUser\022\023.rpc.GetUserReq" +
+      "uest\032\024.rpc.GetUserResponse\"\000\022?\n\nCreatePo" +
+      "st\022\026.rpc.CreatePostRequest\032\027.rpc.CreateP" +
+      "ostResponse\"\000\0226\n\007GetPost\022\023.rpc.GetPostRe" +
+      "quest\032\024.rpc.GetPostResponse\"\000\022D\n\013GetAllP" +
+      "osts\022\027.rpc.GetAllPostsRequest\032\030.rpc.GetA" +
+      "llPostsResponse\"\0000\001\022D\n\013GetAllUsers\022\027.rpc" +
+      ".GetAllUsersRequest\032\030.rpc.GetAllUsersRes" +
+      "ponse\"\0000\0012\374\004\n\005Mysql\0226\n\007GetUser\022\023.rpc.Get" +
+      "UserRequest\032\024.rpc.GetUserResponse\"\000\022?\n\nC" +
+      "reatePost\022\026.rpc.CreatePostRequest\032\027.rpc." +
+      "CreatePostResponse\"\000\0226\n\007GetPost\022\023.rpc.Ge" +
+      "tPostRequest\032\024.rpc.GetPostResponse\"\000\022D\n\013" +
+      "GetAllPosts\022\027.rpc.GetAllPostsRequest\032\030.r" +
+      "pc.GetAllPostsResponse\"\0000\001\022D\n\013GetAllUser" +
+      "s\022\027.rpc.GetAllUsersRequest\032\030.rpc.GetAllU" +
+      "sersResponse\"\0000\001\022L\n\021CreateUserOnMysql\022\035." +
+      "rpc.CreateUserOnMysqlRequest\032\026.google.pr" +
+      "otobuf.Empty\"\000\0228\n\007Prepare\022\023.rpc.PrepareR" +
+      "equest\032\026.google.protobuf.Empty\"\000\022:\n\010Vali" +
+      "date\022\024.rpc.ValidateRequest\032\026.google.prot" +
+      "obuf.Empty\"\000\0226\n\006Commit\022\022.rpc.CommitReque" +
+      "st\032\026.google.protobuf.Empty\"\000\022:\n\010Rollback" +
+      "\022\024.rpc.RollbackRequest\032\026.google.protobuf" +
+      ".Empty\"\000B\026\n\nsample.rpcB\006SampleP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -194,7 +194,7 @@ public final class Sample {
     internal_static_rpc_Post_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_rpc_Post_descriptor,
-        new java.lang.String[] { "PostId", "UserId", "Content", });
+        new java.lang.String[] { "PostId", "UserId", "Name", "Content", });
     internal_static_rpc_User_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_rpc_User_fieldAccessorTable = new
@@ -236,7 +236,7 @@ public final class Sample {
     internal_static_rpc_GetPostResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_rpc_GetPostResponse_descriptor,
-        new java.lang.String[] { "PostId", "UserId", "Content", });
+        new java.lang.String[] { "PostId", "UserId", "Name", "Content", });
     internal_static_rpc_GetAllPostsRequest_descriptor =
       getDescriptor().getMessageTypes().get(10);
     internal_static_rpc_GetAllPostsRequest_fieldAccessorTable = new
