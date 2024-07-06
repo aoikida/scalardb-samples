@@ -15,7 +15,8 @@ export const AddPostButton: FC<Props> = ({ onClick }) => {
       color="primary"
       aria-label="add"
       onClick={onClick}
-      className="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded-full shadow-md"
+      className="fixed bottom-4 bg-sky-500 right-4 text-white p-4 rounded-full shadow-md"
+      sx={{ backgroundColor: "#bfdbfe" }}
     >
       <AddIcon />
     </IconButton>
