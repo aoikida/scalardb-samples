@@ -8,7 +8,6 @@ import { AddPostDialog } from "./_components/add-post-dialog";
 import { Post } from "./_models/post";
 import { PostCard } from "./_components/post-card";
 import { getAllPost } from "@/services/requests/get-all-post";
-import { getUser } from "@/services/requests/get-user";
 
 const Home: NextPage = () => {
   const [isOpen, setIsOpen] = useState(false);

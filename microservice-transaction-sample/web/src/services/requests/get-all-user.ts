@@ -1,7 +1,7 @@
 "use server";
 
 import { $ } from "zx";
-import { UserResponse } from "./authentication-util";
+import { UserResponse } from "./type";
 import { extractResponseFromStdout } from "./extract-response";
 
 export const getAllUser = async (): Promise<UserResponse[]> => {

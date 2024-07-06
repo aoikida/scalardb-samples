@@ -1,7 +1,7 @@
 "use server";
 
 import { $ } from "zx";
-import { PostResponse } from "./authentication-util";
+import { PostResponse } from "./type";
 import { extractResponseFromStdout } from "./extract-response";
 
 export const getAllPost = async (

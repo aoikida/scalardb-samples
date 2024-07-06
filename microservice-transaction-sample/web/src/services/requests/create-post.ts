@@ -1,7 +1,6 @@
 "use server";
 
 import { $ } from "zx";
-import { getUserId } from "./authentication-util";
 
 export const createPost = async (
   userId: number,
