@@ -13,7 +13,7 @@ import { getUser } from "@/services/requests/get-user";
 const Home: NextPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [posts, setPosts] = useState<Post[]>([]);
-  const [serverName, setServerName] = useState("サーバー A");
+  const [serverName, setServerName] = useState("サーバーA");
   const [refreshPosts, setRefreshPosts] = useState<Date>();
 
   useEffect(() => {
@@ -46,6 +46,8 @@ const Home: NextPage = () => {
       {/* TODO: サーバー名は動的に変更する */}
       <AddPostDialog
         onClose={() => setIsOpen(false)}
+        // TODO: ユーザーIDはログインユーザーのIDを取得する
+        userId={1}
         server="サーバーA"
         isOpen={isOpen}
       />

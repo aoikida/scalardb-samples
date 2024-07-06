@@ -19,15 +19,21 @@ import { createPost } from "@/services/requests/create-post";
 
 type Props = {
   onClose: () => void;
+  userId: number;
   server: string;
   isOpen: boolean;
 };
 
-export const AddPostDialog: FC<Props> = ({ onClose, server, isOpen }) => {
+export const AddPostDialog: FC<Props> = ({
+  onClose,
+  userId,
+  server,
+  isOpen,
+}) => {
   const form = useForm<Post>({
     resolver: zodResolver(PostSchema),
     defaultValues: {
-      userId: 1,
+      userId,
       server,
     },
   });
@@ -42,7 +48,7 @@ export const AddPostDialog: FC<Props> = ({ onClose, server, isOpen }) => {
     const formData = { userId, message, server };
 
     try {
-      await createPost(message, server);
+      await createPost(userId, message, server);
       toast({
         title: "Success",
         description: "Your post has been added.",
