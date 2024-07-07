@@ -1,35 +1,52 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AddPostButton } from "./_components/add-post-button";
 import { AddPostDialog } from "./_components/add-post-dialog";
 import type { NextPage } from "next";
+import { getAllPost } from "@/services/requests/get-all-post";
+import { PostCard } from "./_components/post-card";
+import { Post } from "./_models/post";
 
 const Home: NextPage = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [serverName, setServerName] = useState("サーバーA");
+  const [refreshPosts, setRefreshPosts] = useState<Date>();
+
+  useEffect(() => {
+    new Promise(async () => {
+      console.log("fetching posts");
+      const response = await getAllPost(serverName);
+
+      const posts = await Promise.all(
+        response.posts.map(async (post) => {
+          const { post_id: postId, content, name } = post;
+          return {
+            id: postId,
+            content,
+            userName: name,
+            serverName,
+          };
+        })
+      );
+      setPosts(posts);
+    });
+  }, [serverName, refreshPosts]);
 
   return (
     <>
       <AddPostDialog
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
+        // TODO: ユーザーIDはログインユーザーのIDを取得する
+        userId={1}
         server="サーバーA"
       />
       <div className="flex flex-col items-center justify-center mt-28 w-full -ml-16">
-        <div className="bg-gradient-to-br from-slate-50 to-[#bfdbfe] p-4 rounded-md shadow-md w-1/2 mb-4">
-          <div className="font-bold">山田太郎</div>
-          <div className="mt-2">
-            新しいカフェを見つけました。コーヒーが美味しくて、店内も落ち着いた雰囲気。ここで勉強するのが楽しみです！☕📚
-            #カフェ巡り #新しいお気に入り
-          </div>
-        </div>
-        <div className="bg-gradient-to-br from-slate-50 to-[#bfdbfe] p-4 rounded-md shadow-md w-1/2 mb-4">
-          <div className="font-bold">山田太郎</div>
-          <div className="mt-2">
-            新しいカフェを見つけました。コーヒーが美味しくて、店内も落ち着いた雰囲気。ここで勉強するのが楽しみです！☕📚
-            #カフェ巡り #新しいお気に入り
-          </div>
-        </div>
+        {posts.map((post) => (
+          <PostCard key={post.id} post={post} />
+        ))}
       </div>
       <div className="absolute bottom-5 right-5">
         <AddPostButton onClick={() => setIsOpen(true)} />
