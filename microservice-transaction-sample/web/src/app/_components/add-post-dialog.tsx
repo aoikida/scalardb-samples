@@ -15,18 +15,25 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import { Post } from "@/services/schema/types";
 import { PostSchema } from "@/services/schema";
+import { createPost } from "@/services/requests/create-post";
 
 type Props = {
   onClose: () => void;
+  userId: number;
   server: string;
   isOpen: boolean;
 };
 
-export const AddPostDialog: FC<Props> = ({ onClose, server, isOpen }) => {
+export const AddPostDialog: FC<Props> = ({
+  onClose,
+  userId,
+  server,
+  isOpen,
+}) => {
   const form = useForm<Post>({
     resolver: zodResolver(PostSchema),
     defaultValues: {
-      userId: 1,
+      userId,
       server,
     },
   });
@@ -41,17 +48,13 @@ export const AddPostDialog: FC<Props> = ({ onClose, server, isOpen }) => {
     const formData = { userId, message, server };
 
     try {
-      await fetch("/api/post", {
-        method: "OPTIONS",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      await createPost(userId, message, server);
       toast({
         title: "Success",
         description: "Your post has been added.",
       });
+      form.reset();
+      onClose();
     } catch (error: any) {
       toast({
         title: "Error",
