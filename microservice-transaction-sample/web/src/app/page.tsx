@@ -1,8 +1,9 @@
 "use client";
 
+import { AddPostButton } from "./_components/add-post-button";
+import { Layout } from "../layouts/page";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { AddPostButton } from "./_components/add-post-button";
 import { useEffect, useState } from "react";
 import { AddPostDialog } from "./_components/add-post-dialog";
 import { Post } from "./_models/post";
@@ -41,14 +42,13 @@ const Home: NextPage = () => {
   }, [serverName, refreshPosts]);
 
   return (
-    <div className="min-h-screen bg-green-400 flex flex-col items-center">
-      {/* TODO: サーバー名は動的に変更する */}
+    <Layout>
       <AddPostDialog
+        isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         // TODO: ユーザーIDはログインユーザーのIDを取得する
         userId={1}
         server="サーバーA"
-        isOpen={isOpen}
       />
       <Head>
         <title>投稿一覧</title>
@@ -62,7 +62,7 @@ const Home: NextPage = () => {
         ))}
       </main>
       <AddPostButton onClick={() => setIsOpen(true)} />
-    </div>
+    </Layout>
   );
 };
 
