@@ -1,6 +1,5 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { SideBar } from "@/layouts/SideBar/page";
 import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,7 +19,6 @@ export default function RootLayout({
           <header className="w-full bg-white shadow-md  text-black text-center py-4 text-2xl font-bold fixed top-0 z-10">
             Server A
           </header>
-          <SideBar />
           <main className="flex-1 bg-slate-100">{children}</main>
         </body>
       </div>

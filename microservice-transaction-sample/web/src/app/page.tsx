@@ -4,12 +4,13 @@ import { useState } from "react";
 import { AddPostButton } from "./_components/add-post-button";
 import { AddPostDialog } from "./_components/add-post-dialog";
 import type { NextPage } from "next";
+import { Layout } from "../layouts/page";
 
 const Home: NextPage = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <>
+    <Layout>
       <AddPostDialog
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
@@ -34,7 +35,7 @@ const Home: NextPage = () => {
       <div className="absolute bottom-5 right-5">
         <AddPostButton onClick={() => setIsOpen(true)} />
       </div>
-    </>
+    </Layout>
   );
 };
 
