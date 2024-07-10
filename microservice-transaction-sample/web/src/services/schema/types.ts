@@ -2,4 +2,5 @@ import { z } from "zod";
 
 import { PostSchema } from ".";
 
-export type Post = z.infer<typeof PostSchema>;
+// ポストを作成するために必要なデータの型
+export type AddPostInput = z.infer<typeof PostSchema>;

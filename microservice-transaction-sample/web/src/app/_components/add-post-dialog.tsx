@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { toast } from "@/components/ui/use-toast";
-import { Post } from "@/services/schema/types";
+import { AddPostInput } from "@/services/schema/types";
 import { PostSchema } from "@/services/schema";
 import { createPost } from "@/services/requests/create-post";
 
@@ -30,7 +30,7 @@ export const AddPostDialog: FC<Props> = ({
   server,
   isOpen,
 }) => {
-  const form = useForm<Post>({
+  const form = useForm<AddPostInput>({
     resolver: zodResolver(PostSchema),
     defaultValues: {
       userId,

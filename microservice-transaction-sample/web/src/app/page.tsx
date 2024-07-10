@@ -1,14 +1,14 @@
 "use client";
 
-import { AddPostButton } from "./_components/add-post-button";
 import { Layout } from "../layouts/page";
-import type { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import { AddPostButton } from "./_components/add-post-button";
 import { AddPostDialog } from "./_components/add-post-dialog";
-import { Post } from "./_models/post";
-import { PostCard } from "./_components/post-card";
+import type { NextPage } from "next";
 import { getAllPost } from "@/services/requests/get-all-post";
+import { PostCard } from "./_components/post-card";
+import { Post } from "./_models/post";
 
 const Home: NextPage = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,16 +23,11 @@ const Home: NextPage = () => {
 
       const posts = await Promise.all(
         response.posts.map(async (post) => {
-          const {
-            post_id: postId,
-            content,
-            user_id: userId,
-            name: userName,
-          } = post;
+          const { post_id: postId, content, name } = post;
           return {
             id: postId,
             content,
-            userName,
+            userName: name,
             serverName,
           };
         })
