@@ -9,10 +9,10 @@ export const createPost = async (
 ): Promise<void> => {
   let commandName = "";
   switch (serverName) {
-    case "サーバーA":
+    case "Server A":
       commandName = "CreatePostOnMysql";
       break;
-    case "サーバーB":
+    case "Server B":
       commandName = "CreatePostOnCassandra";
   }
   message = message.replace(/ /g, "_");

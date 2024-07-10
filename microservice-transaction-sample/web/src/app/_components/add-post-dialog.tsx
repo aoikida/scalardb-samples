@@ -44,10 +44,9 @@ export const AddPostDialog: FC<Props> = ({
     const data = getValues();
     const userId = data.userId;
     const message = data.message;
-    const server = data.server;
-    const formData = { userId, message, server };
 
     try {
+      console.log({ userId, server, message });
       await createPost(userId, message, server);
       toast({
         title: "Success",
