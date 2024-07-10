@@ -14,11 +14,11 @@ export default function RootLayout({
       <Head>
         <title>投稿一覧</title>
       </Head>
-      <div className="flex">
+      <div className="flex w-full">
+        <header className="w-full bg-white shadow-md  text-black text-center py-4 text-2xl font-bold fixed top-0 z-10">
+          Server A
+        </header>
         <body className="flex w-full">
-          <header className="w-full bg-white shadow-md  text-black text-center py-4 text-2xl font-bold fixed top-0 z-10">
-            Server A
-          </header>
           <main className="flex-1 bg-slate-100">{children}</main>
         </body>
       </div>
