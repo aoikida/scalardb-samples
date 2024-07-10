@@ -1,5 +1,7 @@
 "use client";
 
+import { Layout } from "../layouts/page";
+import Head from "next/head";
 import { useEffect, useState } from "react";
 import { AddPostButton } from "./_components/add-post-button";
 import { AddPostDialog } from "./_components/add-post-dialog";
@@ -35,7 +37,7 @@ const Home: NextPage = () => {
   }, [serverName, refreshPosts]);
 
   return (
-    <>
+    <Layout>
       <AddPostDialog
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
@@ -43,15 +45,19 @@ const Home: NextPage = () => {
         userId={1}
         server="サーバーA"
       />
-      <div className="flex flex-col items-center justify-center mt-28 w-full -ml-16">
+      <Head>
+        <title>投稿一覧</title>
+      </Head>
+      <header className="w-full bg-green-500 text-white text-center py-4 text-2xl font-bold fixed top-0">
+        サーバーA
+      </header>
+      <main className="flex flex-col items-center justify-center mt-20 w-full">
         {posts.map((post) => (
-          <PostCard key={post.id} post={post} />
+          <PostCard key={post.id} post={post}></PostCard>
         ))}
-      </div>
-      <div className="absolute bottom-5 right-5">
-        <AddPostButton onClick={() => setIsOpen(true)} />
-      </div>
-    </>
+      </main>
+      <AddPostButton onClick={() => setIsOpen(true)} />
+    </Layout>
   );
 };
 
