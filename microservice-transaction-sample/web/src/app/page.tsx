@@ -9,47 +9,51 @@ import type { NextPage } from "next";
 import { getAllPost } from "@/services/requests/get-all-post";
 import { PostCard } from "./_components/post-card";
 import { Post } from "./_models/post";
+import { useServerName } from "./context/server";
 
 const Home: NextPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [posts, setPosts] = useState<Post[]>([]);
-  const [serverName, setServerName] = useState("サーバーA");
+  const { server, setServer } = useServerName();
   const [refreshPosts, setRefreshPosts] = useState<Date>();
 
   useEffect(() => {
     new Promise(async () => {
-      console.log("fetching posts");
-      const response = await getAllPost(serverName);
+      console.log(`fetching posts of ${server}`);
+      const response = await getAllPost(server);
 
       const posts = await Promise.all(
-        response.posts.map(async (post) => {
+        response.posts.reverse().map(async (post) => {
           const { post_id: postId, content, name } = post;
           return {
             id: postId,
             content,
             userName: name,
-            serverName,
+            serverName: server,
           };
         })
       );
       setPosts(posts);
     });
-  }, [serverName, refreshPosts]);
+  }, [server, refreshPosts]);
 
   return (
     <Layout>
       <AddPostDialog
         isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
+        onClose={() => {
+          setRefreshPosts(new Date());
+          setIsOpen(false);
+        }}
         // TODO: ユーザーIDはログインユーザーのIDを取得する
         userId={1}
-        server="サーバーA"
+        server={server}
       />
       <Head>
         <title>投稿一覧</title>
       </Head>
       <header className="w-full bg-green-500 text-white text-center py-4 text-2xl font-bold fixed top-0">
-        サーバーA
+        Server A
       </header>
       <main className="flex flex-col items-center justify-center mt-20 w-full">
         {posts.map((post) => (

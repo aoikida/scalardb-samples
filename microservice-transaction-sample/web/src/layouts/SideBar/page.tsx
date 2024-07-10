@@ -7,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useServerName } from "@/app/context/server";
 
 const sidebarNavItems = [
   {
@@ -17,16 +18,20 @@ const sidebarNavItems = [
 ];
 
 export const SideBar: FC = () => {
+  const { server, setServer } = useServerName();
   return (
     <div className="h-screen bg-[#D1E5FE] w-[228px] pt-28">
       <div className="flex justify-center">
-        <Select>
+        <Select
+          defaultValue={server}
+          onValueChange={(value) => setServer(value)}
+        >
           <SelectTrigger className="w-4/5">
             <SelectValue placeholder="" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="server-A">Server A</SelectItem>
-            <SelectItem value="server-B">Server B</SelectItem>
+            <SelectItem value="Server A">Server A</SelectItem>
+            <SelectItem value="Server B">Server B</SelectItem>
           </SelectContent>
         </Select>
       </div>

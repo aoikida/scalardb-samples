@@ -9,10 +9,10 @@ export const getAllPost = async (
 ): Promise<{ posts: PostResponse[] }> => {
   let commandName = "";
   switch (serverName) {
-    case "サーバーA":
+    case "Server A":
       commandName = "GetAllPostsFromMysql";
       break;
-    case "サーバーB":
+    case "Server B":
       commandName = "GetAllPostsFromCassandra";
   }
   const exec = await $`cd ..; ./gradlew :client:run --args="${commandName}"`;
