@@ -35,7 +35,7 @@ export const SideBar: FC = () => {
           </SelectContent>
         </Select>
       </div>
-      <div className="font-bold m-4">user: Andy</div>
+      <div className="font-bold m-4">user: Bill</div>
       <aside className="mt-20">
         <SidebarNav items={sidebarNavItems} />
       </aside>
