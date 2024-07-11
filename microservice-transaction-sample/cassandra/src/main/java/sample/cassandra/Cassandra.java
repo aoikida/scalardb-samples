@@ -82,9 +82,18 @@ public class Cassandra extends CassandraGrpc.CassandraImplBase implements Closea
       loadUserIfNotExists(transaction, NextId.userId, "Andy", "passwordandy");
       loadUserIfNotExists(transaction, NextId.userId, "Bill", "passwordbill");
       loadUserIfNotExists(transaction, NextId.userId, "Carlie", "passwordcarlie");
-      loadPostIfNotExists(transaction, NextId.postId, 1, "Cassandra,Aloha!");
-      loadPostIfNotExists(transaction, NextId.postId, 2, "Cassandra,Bonjour!");
-      loadPostIfNotExists(transaction, NextId.postId, 3, "Casasndra,Ciao!");
+      loadPostIfNotExists(transaction, NextId.postId, 1, "ServerB, Aloha!");
+      loadPostIfNotExists(transaction, NextId.postId, 2, "ServerB, Bonjour!");
+      loadPostIfNotExists(transaction, NextId.postId, 3, "ServerB, Ciao!");
+      loadPostIfNotExists(transaction, NextId.postId, 1, "ServerB, Dobry den!");
+      loadPostIfNotExists(transaction, NextId.postId, 2, "ServerB, Guten Tag!");
+      loadPostIfNotExists(transaction, NextId.postId, 3, "ServerB, Hallo!");
+      loadPostIfNotExists(transaction, NextId.postId, 1, "ServerB, Merhaba !");
+      loadPostIfNotExists(transaction, NextId.postId, 2, "ServerB, Namaste!");
+      loadPostIfNotExists(transaction, NextId.postId, 3, "ServerB, Ciao!");
+      loadPostIfNotExists(transaction, NextId.postId, 1, "ServerB, Oi!");
+      loadPostIfNotExists(transaction, NextId.postId, 2, "ServerB, Privet!");
+      loadPostIfNotExists(transaction, NextId.postId, 3, "ServerB, Sawasdee !");
       transaction.commit();
     } catch (TransactionException e) {
       logger.error("Loading initial data failed", e);

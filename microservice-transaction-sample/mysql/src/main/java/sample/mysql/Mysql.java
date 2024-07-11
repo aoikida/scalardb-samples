@@ -77,9 +77,20 @@ public class Mysql extends MysqlGrpc.MysqlImplBase implements Closeable {
       loadUserIfNotExists(transaction, NextId.userId, "Andy", "passwordandy");
       loadUserIfNotExists(transaction, NextId.userId, "Bill", "passwordbill");
       loadUserIfNotExists(transaction, NextId.userId, "Carlie", "passwordcarlie");
-      loadPostIfNotExists(transaction, NextId.postId, 1, "MySQL,Aloha!");
-      loadPostIfNotExists(transaction, NextId.postId, 2, "MySQL,Bonjour!");
-      loadPostIfNotExists(transaction, NextId.postId, 3, "MySQL,Ciao!");
+      loadPostIfNotExists(transaction, NextId.postId, 1, "ServerA, Aloha!");
+      loadPostIfNotExists(transaction, NextId.postId, 2, "ServerA, Bonjour!");
+      loadPostIfNotExists(transaction, NextId.postId, 3, "ServerA, Ciao!");
+      loadPostIfNotExists(transaction, NextId.postId, 1, "ServerA, Dobry den!");
+      loadPostIfNotExists(transaction, NextId.postId, 2, "ServerA, Guten Tag!");
+      loadPostIfNotExists(transaction, NextId.postId, 3, "ServerA, Hallo!");
+      loadPostIfNotExists(transaction, NextId.postId, 1, "ServerA, Merhaba !");
+      loadPostIfNotExists(transaction, NextId.postId, 2, "ServerA, Namaste!");
+      loadPostIfNotExists(transaction, NextId.postId, 3, "ServerA, Ciao!");
+      loadPostIfNotExists(transaction, NextId.postId, 1, "ServerA, Oi!");
+      loadPostIfNotExists(transaction, NextId.postId, 2, "ServerA, Privet!");
+      loadPostIfNotExists(transaction, NextId.postId, 3, "ServerA, Sawasdee !");
+
+
       transaction.commit();
     } catch (TransactionException e) {
       logger.error("Loading initial data failed", e);
