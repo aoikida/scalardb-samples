@@ -318,6 +318,20 @@ You should see the following output:
 ...
 ```
 
+## Start Application
+Please move to web directory and install packages.
+```console
+cd web  
+npm i
+```
+
+After finish installing packages, execute following command.
+```console
+npm run dev
+```
+
+
+If successfully started, open `localhost:3000` on your browser.
 
 ## Stop the sample application
 
