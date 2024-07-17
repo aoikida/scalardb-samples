@@ -2,34 +2,23 @@
 
 # Sample application of distributed Social Network Service with scalarDB
 
-This repository is a distributed SNS implementation using scalarDB.
+This repository is a distributed SNS sample application using scalarDB.
 
 ## Overview
 
-The sample e-commerce application shows how users can order and pay for items by using a line of credit. The use case described in this tutorial is the same as the basic [ScalarDB sample](../scalardb-sample/README.md) but takes advantage of [transactions with a two-phase commit interface](https://github.com/scalar-labs/scalardb/tree/master/docs/two-phase-commit-transactions.md) when using ScalarDB.
+The application architecture is as follows:
 
-The sample application has two microservices called the *MySQL Server* and the *Cassandra Server* based on the [database-per-service pattern](https://microservices.io/patterns/data/database-per-service.html):
-
-- The **MySQL Server** manages customer information, including line-of-credit information, credit limit, and credit total.
-- The **Cassandra Server** is responsible for order operations like placing an order and getting order histories.
-
-Each service has gRPC endpoints. Clients call the endpoints, and the services call each endpoint as well.
-
-The databases that you will be using in the sample application are Cassandra and MySQL. The Customer Service and the Order Service use Cassandra and MySQL, respectively, through ScalarDB.
+- Client: User interface using Next.js
+- Coordinator: Manages communication between the client and servers
+- MySQL Server: Accesses MySQL database through ScalarDB
+- Cassandra Server: Accesses Cassandra database through ScalarDB
 
 ![Overview](images/overview.png)
 
-As shown in the diagram, both services access a small Coordinator database used for the Consensus Commit protocol. The database is service-independent and exists for managing transaction metadata for Consensus Commit in a highly available manner.
+For more detailed information, please refer to the following slides:
 
-In the sample application, for ease of setup and explanation, we co-locate the Coordinator database in the same Cassandra instance of the Order Service. Alternatively, you can manage the Coordinator database as a separate database.
+[Slide](https://docs.google.com/presentation/d/1TTx-xpSkOx1mSo1llOV1hijUctNk4g-UKc0dB9yXDBc/edit?usp=sharing)
 
-{% capture notice--info %}
-**Note**
-
-Since the focus of the sample application is to demonstrate using ScalarDB, application-specific error handling, authentication processing, and similar functions are not included in the sample application. For details about exception handling in ScalarDB, see [How to handle exceptions](https://github.com/scalar-labs/scalardb/blob/master/docs/api-guide.md#how-to-handle-exceptions).
-
-Additionally, for the purpose of the sample application, each service has one container so that you can avoid using request routing between the services. However, for production use, because each service typically has multiple servers or hosts for scalability and availability, you should consider request routing between the services in transactions with a two-phase commit interface. For details about request routing, see [Request routing in transactions with a two-phase commit interface](https://github.com/scalar-labs/scalardb/blob/master/docs/two-phase-commit-transactions.md#request-routing-in-transactions-with-a-two-phase-commit-interface).
-{% endcapture %}
 
 ## Prerequisites
 
@@ -109,6 +98,41 @@ To load the schema for [`cassandra-schema.json`](cassandra-schema.json) into Cas
 java -jar scalardb-schema-loader-3.12.2.jar --config database-cassandra.properties --schema-file cassandra-schema.json --coordinator
 ```
 
+### Load the initial data by starting the microservices
+
+Before starting the microservices, build the Docker images of the sample application by running the following command:
+
+```console
+./gradlew docker
+```
+
+Then, start the microservices by running the following command:
+
+```console
+docker-compose up -d mysql-server cassandra-server
+```
+
+## Start Application
+Please move to web directory and install packages.
+```console
+cd web
+npm i
+```
+
+After finish installing packages, execute following command.
+```console
+npm run dev
+```
+
+If successfully started, open `localhost:3000` on your browser.
+
+If all the operations up to this point have been successful, you should be able to see the following screen: 
+
+![SCREEN](images/screen.png)
+
+You can see and put posts.
+
+
 #### Schema details
 
 As shown in [`mysql-schema.json`](mysql-schema.json) for the sample application, all the tables for the MySQL server are created in the `mysql` namespace.
@@ -138,20 +162,6 @@ As shown in [`cassandra-schema.json`](cassandra-schema.json) for the sample appl
 The Entity Relationship Diagram for the schema is as follows:
 
 ![ERD](images/Distributed_SNS_ERD.png)
-
-### Load the initial data by starting the microservices
-
-Before starting the microservices, build the Docker images of the sample application by running the following command:
-
-```console
-./gradlew docker
-```
-
-Then, start the microservices by running the following command:
-
-```console
-docker-compose up -d mysql-server cassandra-server
-```
 
 #### MySQL server
 
@@ -317,21 +327,6 @@ You should see the following output:
 {"posts": [{"post_id": 1,"user_id": 1,"name": "Andy","content": "Cassandra,Aloha!"},{"post_id": 2,"user_id": 2,"name": "Bill","content": "Cassandra,Bonjour!"},{"post_id": 3,"user_id": 3,"name": "Carlie","content": "Casasndra,Ciao!"},{"post_id": 4,"user_id": 4,"name": "Kida","content": "Cassandra,Konnichiwa!"}]}
 ...
 ```
-
-## Start Application
-Please move to web directory and install packages.
-```console
-cd web  
-npm i
-```
-
-After finish installing packages, execute following command.
-```console
-npm run dev
-```
-
-
-If successfully started, open `localhost:3000` on your browser.
 
 ## Stop the sample application
 
