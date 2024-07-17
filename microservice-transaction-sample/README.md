@@ -9,15 +9,13 @@ This repository is a distributed SNS sample application using scalarDB.
 The application architecture is as follows:
 
 - Client: User interface using Next.js
-- Coordinator: Manages communication between the client and servers
-- MySQL Server: Accesses MySQL database through ScalarDB
-- Cassandra Server: Accesses Cassandra database through ScalarDB
+- Server A : Accesses MySQL database through ScalarDB
+- Server B: Accesses Cassandra database through ScalarDB
+- Coordinator: Manages communication between the ServerA and ServerB
 
 ![Overview](images/overview.png)
 
-For more detailed information, please refer to the following slides:
-
-[Slide](https://docs.google.com/presentation/d/1TTx-xpSkOx1mSo1llOV1hijUctNk4g-UKc0dB9yXDBc/edit?usp=sharing)
+For more detailed information, please refer to [this slide](https://docs.google.com/presentation/d/1TTx-xpSkOx1mSo1llOV1hijUctNk4g-UKc0dB9yXDBc/edit?usp=sharing)
 
 
 ## Prerequisites
