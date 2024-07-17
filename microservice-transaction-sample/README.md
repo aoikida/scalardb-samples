@@ -15,7 +15,7 @@ The application architecture is as follows:
 
 ![Overview](images/overview.png)
 
-For more detailed information, please refer to [this slide](https://docs.google.com/presentation/d/1TTx-xpSkOx1mSo1llOV1hijUctNk4g-UKc0dB9yXDBc/edit?usp=sharing)
+For more detailed information, please refer to [this slide](https://docs.google.com/presentation/d/1TTx-xpSkOx1mSo1llOV1hijUctNk4g-UKc0dB9yXDBc/edit?usp=sharing).
 
 
 ## Prerequisites
