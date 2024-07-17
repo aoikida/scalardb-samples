@@ -79,21 +79,19 @@ To apply the schema, go to the [ScalarDB Releases](https://github.com/scalar-lab
 
 #### MySQL
 
-To load the schema for [`mysql-schema.json`](mysql-schema.json) into MySQL, run the following command
+To load the schema for [`mysql-schema.json`](mysql-schema.json) into MySQL, run the following command, replacing `<VERSION>` with the version of the ScalarDB Schema Loader that you downloaded:
 
 ```console
-java -jar scalardb-schema-loader-3.12.2.jar --config database-mysql.properties --schema-file mysql-schema.json
+java -jar scalardb-schema-loader-<VERSION>.jar --config database-mysql.properties --schema-file mysql-schema.json
 
 ```
 
-*This command sometimes fails, so when fails, please execute command again*
-
 #### Cassandra
 
-To load the schema for [`cassandra-schema.json`](cassandra-schema.json) into Cassandra, run the following command
+To load the schema for [`cassandra-schema.json`](cassandra-schema.json) into Cassandra, run the following command, replacing `<VERSION>` with the version of the ScalarDB Schema Loader that you downloaded:
 
 ```console
-java -jar scalardb-schema-loader-3.12.2.jar --config database-cassandra.properties --schema-file cassandra-schema.json --coordinator
+java -jar scalardb-schema-loader-<VERSION>.jar --config database-cassandra.properties --schema-file cassandra-schema.json --coordinator
 ```
 
 ### Load the initial data by starting the microservices
